@@ -1,0 +1,10 @@
+Download antergos iso: https://antergos.com/download/antergos-live-iso/
+
+Create bootable usb: etcher https://etcher.io/, or your choice
+
+Go through Cinchi to the format hard drive part
+Clcik on the main drive line, create new partition table
+select mbr
+create boot partition: 550MB fat32 mount /boot
+create root partition: rest f2fs mount /
+finished
