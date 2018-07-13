@@ -4,18 +4,16 @@ My arch linux dotfiles.
 
 # To do
 
-Create initial install script
- * sway
- * dmenu
- * termite
- * pulse
- * dejavu font
- * tamsyn font
+ * Style the virtual desktop icons
+ * Remove all borders (for performance)
+ * Configure .bashrc to load sway on card1
 
-Create script to pull down dotfiles and install
- * sway
- * dmenu
- * termite
+Create script to pull down dotfiles
+ * Clone git repo to ~/.config
+
+Configure alternate menu in sway
+ * "compgen -c | sort -u | fzf | xargs -r swaymsg -t command exec"
+ * Launch in a terminal window with a specific class and configure sway to float and position the window
 
 # Copy dots
 https://www.reddit.com/r/unixporn/comments/8wh3c9/i3_i_have_spent_enough_hours/
