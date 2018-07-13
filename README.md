@@ -8,6 +8,7 @@ Create initial install script
  * sway
  * dmenu
  * termite
+ * pulse
  * dejavu font
  * tamsyn font
 
