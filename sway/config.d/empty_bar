@@ -1,0 +1,17 @@
+# Status Bar:
+#
+# Empty swaybar, placeholder for polybar
+bar {
+    #Height is polybar_yoffset + height
+    height 36
+    position top
+    colors {
+        statusline #00000000
+        background #00000000
+    }
+    workspace_buttons no
+    binding_mode_indicator no
+    #Status command has to be running and have a std::cout
+    #Run echo every 60 seconds
+    status_command while :;do echo; sleep 60; done
+}

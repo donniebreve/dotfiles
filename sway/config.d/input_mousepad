@@ -1,0 +1,13 @@
+input 1739:30383:DELL07E6:00_06CB:76AF_To {
+	natural_scroll enabled
+	tap enabled
+	#Clickfinger works even if this is enabled
+	click_method button_areas
+	#click_method clickfinger
+	accel_profile adaptive
+	#dwt enabled
+	dwt disabled
+	drag_lock enabled
+}	
+
+

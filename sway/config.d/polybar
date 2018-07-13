@@ -1,0 +1,5 @@
+#Load empty bar for placeholder
+include $config_dir/empty_bar
+
+#Run polybar
+exec_always --no-startup-id /home/marten/bin/polybar.sh

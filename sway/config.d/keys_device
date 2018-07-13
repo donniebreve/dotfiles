@@ -1,0 +1,7 @@
+# Device settings e.g. brightness
+#bindsym XF86MonBrightnessUp exec brightnessctl -b /sys/class/backlight/intel_backlight --change add 1%; exec pkill -SIGRTMIN+12 i3blocks
+#bindsym XF86MonBrightnessDown exec brightnessctl -b /sys/class/backlight/intel_backlight --change remove 1%; exec pkill -SIGRTMIN+12 i3blocks
+
+# Powermanagement
+# bindsym $mod+Shift+Alt+p exec shutdown -P now
+
