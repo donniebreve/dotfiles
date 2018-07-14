@@ -36,8 +36,8 @@ include $config_dir/swaybar
 # Autostart Applications
 # include $config_dir/autostart
 
-#Window specific criteria
-# include $config_dir/for_window
+# Window specific criteria
+include $config_dir/for_window
 
 include /etc/sway/config.d/*
 

@@ -5,7 +5,7 @@ gaps outer 0
 
 # Set wallpaper
 # output * bg /usr/local/share/backgrounds/acient-spaceship.jpg fill
-output * bg @datadir@/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
+output * bg ~/Pictures/abs1.jpg fill
 
 # hide_edge_borders both
 new_window pixel

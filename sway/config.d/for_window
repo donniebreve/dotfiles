@@ -1,2 +1,0 @@
-for_window [class="Steam"] move container to workspace Gaming
-for_window [class="(?i)spotify"] move container to workspace Spotify
