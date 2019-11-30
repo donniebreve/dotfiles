@@ -1,3 +1,6 @@
+# Exports
+export CLICOLOR=1
+
 # Auto completion
 zstyle ':completion:*' completer _complete _ignored
 zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}'
@@ -17,6 +20,14 @@ zstyle ':vcs_info:*' enable git
 
 # Standard configuration
 bindkey -v
+# del, home, end
+bindkey "\e[3~" delete-char
+bindkey "\e[H"  beginning-of-line
+bindkey "\eOH"  beginning-of-line
+bindkey "\e[1~" beginning-of-line
+bindkey "\e[F"  end-of-line
+bindkey "\eOF"  end-of-line
+bindkey "\e[4~" end-of-line
 
 # Aliases
 alias ls='ls -laF --color=auto'
