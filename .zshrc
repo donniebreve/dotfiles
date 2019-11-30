@@ -10,6 +10,9 @@ zstyle :compinstall filename '/home/don/.zshrc'
 autoload -Uz compinit
 compinit
 
+# History at current cursor
+autoload -Uz up-line-or-beginning-search down-line-or-beginning-search
+
 # Git information
 autoload -Uz vcs_info
 precmd_vcs_info() { vcs_info }
