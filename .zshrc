@@ -37,28 +37,40 @@ alias ls='ls -laF --color=auto'
 alias bonsai='./bonsai.sh -n -L 20 -g 35,20 > /tmp/bonsai.txt | neofetch --ascii /tmp/bonsai.txt --ascii_colors 11 3 10 2 0'
 
 # The Fuck
-eval "$(thefuck --alias)"
+fuck () {
+    TF_PYTHONIOENCODING=$PYTHONIOENCODING;
+    export TF_SHELL=zsh;
+    export TF_ALIAS=fuck;
+    TF_HISTORY="$(fc -ln -10)";
+    export TF_HISTORY;
+    export PYTHONIOENCODING=utf-8;
+    TF_CMD=$(
+        thefuck THEFUCK_ARGUMENT_PLACEHOLDER $@
+    ) && eval $TF_CMD;
+    unset TF_HISTORY;
+    export PYTHONIOENCODING=$TF_PYTHONIOENCODING;
+    test -n "$TF_CMD" && print -s $TF_CMD
+}
 
 # Pacman shortcuts
-#alias pacman-install='sudo pacman -S'
-#alias pacman-search-local='pacman -Qs'
-#alias pacman-search-online='pacman -Ss'
-#alias pacman-remove='sudo pacman -Rns'
-#alias pacman-update='sudo pacman -Syu'
-#alias pacman-mirror-update='reflector --country US --protocol https -i .edu --sort rate | sudo tee /etc/pacman.d/mirrorlist'
 pacman() {
     if [[ $1 == "install" ]]; then
-        command sudo pacman -S $2
-    elif [[ $1 == "installed" ]]; then
-        command pacman -Qs $2
+        command sudo pacman -S ${@:2}
+    elif [[ $1 == "search" ]]; then
+        command pacman -Qs ${@:2}
     elif [[ $1 == "uninstall" ]]; then
-        command sudo pacman -Rns $2
+        command sudo pacman -Rs ${@:2}
     elif [[ $1 == "update" ]]; then
         command sudo pacman -Syu
     elif [[ $1 == "mirrors" ]]; then
-        command sudo reflector --country US --protocol https -i .edu --sort rate | sudo tee /etc/pacman.d/mirrorlist
-    fi
+        command sudo reflector --country US --protocol https -i .edu --sort rate | sudo tee /etc/pacman.
+    elif [[ $1 == "cleanup" ]]; then
+        command sudo pacman -Sc 
+    else
+        echo "invalid command"
+    fi  
 }
+
 
 # Transmission shortcuts
 trm() {
