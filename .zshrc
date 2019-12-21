@@ -34,6 +34,10 @@ bindkey "\e[4~" end-of-line
 
 # Aliases
 alias ls='ls -laF --color=auto'
+alias bonsai='./bonsai.sh -n -L 20 -g 35,20 > /tmp/bonsai.txt | neofetch --ascii /tmp/bonsai.txt --ascii_colors 11 3 10 2 0'
+
+# The Fuck
+eval "$(thefuck --alias)"
 
 # Pacman shortcuts
 #alias pacman-install='sudo pacman -S'
