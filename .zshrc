@@ -74,7 +74,7 @@ pacman() {
 
 # Transmission shortcuts
 trm() {
-    command transmission-remote $1
+    command transmission-remote ${@:1}
 }
 
 # Prompt
