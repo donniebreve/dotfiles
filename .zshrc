@@ -77,6 +77,29 @@ trm() {
     command transmission-remote ${@:1}
 }
 
+# Virtualbox
+vbox() {
+    if [[ $1 == "start" ]]; then
+        command vboxmanage startvm $2 --type:headless
+    elif [[ $1 == "shutdown" ]]; then
+        command vboxmanage controlvm $2 acpipowerbutton
+    elif [[ $1 == "list" ]]; then
+        if [[ $2 == "verbose" ]]; then
+            command vboxmanage list -l runningvms
+        else
+            command vboxmanage list runningvms
+        fi
+    elif [[ $1 == "poweroff" ]]; then
+        command vboxmanage controlvm $2 poweroff
+    elif [[ $1 == "info" ]]; then
+        command vboxmanage showvminfo $2
+    elif [[ $1 == "insert-ga" ]]; then
+        command vboxmanage storageattach $2 --storagectl IDE --port 0 --device 0 --type dvddrive --medium "/usr/lib/virtualbox/additions/VBoxGuestAdditions.iso"
+    elif [[ $1 == "remove-ga" ]]; then
+        command vboxmanage storageattach $2 --storagectl IDE --port 0 --device 0 --type dvddrive --medium "none"
+    fi
+}
+
 # Prompt
 #   Bash
 #       Default='\033[0m'
