@@ -63,7 +63,7 @@ pacman() {
     elif [[ $1 == "update" ]]; then
         command sudo pacman -Syu
     elif [[ $1 == "mirrors" ]]; then
-        command sudo reflector --country US --protocol https -i .edu --sort rate | sudo tee /etc/pacman.
+        command sudo reflector --country US --protocol https -i .edu --sort rate | sudo tee /etc/pacman.d/mirrorlist
     elif [[ $1 == "cleanup" ]]; then
         command sudo pacman -Sc 
     else
