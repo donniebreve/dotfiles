@@ -79,12 +79,11 @@ determining the search direction."
       (evil-ex-delete-hl 'evil-ex-search)
       (evil-ex-search-next count))))
 
-(evil-define-motion +evil-ex-search-selection-forward (count &optional symbol)
+(evil-define-motion +evil-ex-search-selection-forward (count)
   "Search for the next occurrence of selection."
   :jump t
   :type exclusive
-  (interactive (list (prefix-numeric-value current-prefix-arg)
-                     evil-symbol-word-search))
+  (interactive (list (prefix-numeric-value current-prefix-arg)))
   (+evil-ex-start-selected-search 'forward count)
   (evil-exit-visual-state))
 
