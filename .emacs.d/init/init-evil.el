@@ -59,6 +59,35 @@
   (evil-normal-state)
   (evil-visual-restore))
 
+(defun +evil-ex-start-selected-search (direction count)
+  "Search for the current selection.
+The search matches the COUNT-th occurrence of the string. The
+DIRECTION argument should be either `forward' or `backward',
+determining the search direction."
+  (let ((search-string (buffer-substring-no-properties (region-beginning) (+ (region-end) 1))))
+    (let ((regex (regexp-quote search-string)))
+      (setq evil-ex-search-count count
+            evil-ex-search-direction direction
+            evil-ex-search-pattern
+            (let (evil-ex-search-vim-style-regexp)
+              (evil-ex-make-search-pattern regex))
+            evil-ex-search-offset nil
+            evil-ex-last-was-search t)
+      (unless (equal regex (car evil-ex-search-history))
+        (push regex evil-ex-search-history))
+      (evil-push-search-history regex (eq direction 'forward))
+      (evil-ex-delete-hl 'evil-ex-search)
+      (evil-ex-search-next count))))
+
+(evil-define-motion +evil-ex-search-selection-forward (count &optional symbol)
+  "Search for the next occurrence of selection."
+  :jump t
+  :type exclusive
+  (interactive (list (prefix-numeric-value current-prefix-arg)
+                     evil-symbol-word-search))
+  (+evil-ex-start-selected-search 'forward count)
+  (evil-exit-visual-state))
+
 (elpaca evil
   (setup evil
     (:option
@@ -87,7 +116,8 @@
               "C-'" 'evil-normal-state)
      (:states '(visual)
               ">" '+evil-shift-right
-              "<" '+evil-shift-left)
+              "<" '+evil-shift-left
+              "*" '+evil-ex-search-selection-forward)
      (:states '(normal visual)
               "H" 'evil-beginning-of-line
               "L" 'evil-end-of-line
