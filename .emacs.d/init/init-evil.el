@@ -129,19 +129,19 @@
       (count &optional beg end type)
       "Select the closest outer quote."
       (let ((evil-textobj-anyblock-blocks evil-textobj-anyblock-quotes))
-	(evil-textobj-anyblock--make-textobj beg end type count nil)))
+	    (evil-textobj-anyblock--make-textobj beg end type count nil)))
     (evil-define-text-object evil-textobj-anyblock-a-quote
       (count &optional beg end type)
       "Select the closest outer quote."
       (let ((evil-textobj-anyblock-blocks evil-textobj-anyblock-quotes))
-	(evil-textobj-anyblock--make-textobj beg end type count t)))
+	    (evil-textobj-anyblock--make-textobj beg end type count t)))
     (:general
      (:keymaps '(evil-inner-text-objects-map)
-	       "b" 'evil-textobj-anyblock-inner-block
-	       "q" 'evil-textobj-anyblock-inner-quote)
+	           "b" 'evil-textobj-anyblock-inner-block
+	           "q" 'evil-textobj-anyblock-inner-quote)
      (:keymaps '(evil-outer-text-objects-map)
-	       "b" 'evil-textobj-anyblock-a-block
-	       "q" 'evil-textobj-anyblock-a-quote))))
+	           "b" 'evil-textobj-anyblock-a-block
+	           "q" 'evil-textobj-anyblock-a-quote))))
 
 
 (provide 'init-evil)
