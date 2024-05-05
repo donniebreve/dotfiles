@@ -50,7 +50,8 @@ Dired buffers, and then executes `+dired-omit-mode`."
 
 (setup dired
   (:option dired-omit-files "\\`[.]\\|\\`[.]?#\\|\\`[.][.]?\\'"
-           dired-kill-when-opening-new-dired-buffer t)
+           dired-kill-when-opening-new-dired-buffer t
+           dired-dwim-target t)
   (:general
    (:states '(normal)
             :keymaps '(override)
@@ -67,7 +68,7 @@ Dired buffers, and then executes `+dired-omit-mode`."
    ;; For some reason "c" seems impossible to bind/unbind
    (:keymaps '(dired-mode-map)
              [remap dired-do-compress-to] 'dired-create-empty-file))
-  (:hook +dired-omit-mode))
+  (:hook #'+dired-omit-mode))
 
 (elpaca diredfl
   (setup diredfl
