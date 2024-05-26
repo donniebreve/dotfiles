@@ -34,6 +34,11 @@
 (require 'setup)
 (require 'general)
 
+(defun +insert-current-date ()
+  "Inserts the current date in Org format `<yyyy-MM-dd ddd>`"
+  (interactive)
+  (insert (format-time-string "<%Y-%m-%d %a>")))
+
 (setup org
   (:option 
    org-directory "~/Documents/Notes"
@@ -41,6 +46,10 @@
    org-todo-keywords '((sequence "TODO(t)" "CURRENT(c)" "HOLD(h)" "|" "DONE(d)" "REMOVED(r)"))
    org-todo-keyword-faces '(("CURRENT" . org-level-3) ("HOLD" . org-warning)))
   (:general
+   (:states '(normal)
+            :keymaps '(org-mode-map)
+            :prefix "SPC"
+            "id" #'+insert-current-date)
    (:keymaps '(org-agenda-mode-map)
              "j" 'evil-next-line
              "k" 'evil-previous-line)))

@@ -33,6 +33,10 @@
 ;; https://github.com/daviwil/emacs-from-scratch/blob/master/init.el
 ;; https://whhone.com/emacs-config/#startup
 
+;;; Informational links:
+;;
+;; https://endlessparentheses.com/get-in-the-habit-of-using-sharp-quote.html
+
 ;;; Code:
 
 ;; Add init files to load path
@@ -99,11 +103,11 @@
  :keymaps '(override)
  :prefix "SPC"
  ;; Global
- ";" '(pp-eval-expression :which-key "Eval expression")
- ":" '(execute-extended-command :which-key "M-x")
- "x" '(scratch-buffer :which-key "Switch to scratch buffer")
- "X" '(org-capture :which-key "Org capture")
- "u" '(universal-argument :which-key "Universal argument")
+ ";"  '(pp-eval-expression :which-key "Eval expression")
+ ":"  '(execute-extended-command :which-key "M-x")
+ "x"  '(scratch-buffer :which-key "Switch to scratch buffer")
+ "X"  '(org-capture :which-key "Org capture")
+ "u"  '(universal-argument :which-key "Universal argument")
  ;; Buffer
  "b"  '(:ignore t :which-key "buffer")
  "b[" '(previous-buffer :which-key "Previous buffer")
@@ -116,6 +120,8 @@
  ;; Help
  "h"  '(:ignore t :which-key "help")
  "h'" '(describe-char :which-key "Describe char")
+ ;; Insert
+ "i"  '(:ignore t :which-key "insert")
  ;; Open
  "o"  '(:ignore t :which-key "open")
  ;; Quit
