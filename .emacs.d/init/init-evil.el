@@ -59,6 +59,21 @@
   (evil-normal-state)
   (evil-visual-restore))
 
+(defun +evil-normal-state ()
+  "Returns to `evil-normal-state'.
+When in insert mode, abort company suggestions and then go to normal mode.
+When in normal mode, abort multiple cursors and then go to normal mode.
+Always quit highlighting."
+  (interactive)
+  (if (eq evil-state 'normal)
+      (if (fboundp 'evil-mc-undo-all-cursors)
+          (evil-mc-undo-all-cursors)))
+  (if (eq evil-state 'insert)
+      (if (fboundp 'company-active-map)
+          (company-abort)))
+  (evil-ex-nohighlight)
+  (evil-normal-state))
+
 (defun +evil-ex-start-selected-search (direction count)
   "Search for the current selection.
 The search matches the COUNT-th occurrence of the string. The
@@ -78,14 +93,6 @@ determining the search direction."
       (evil-push-search-history regex (eq direction 'forward))
       (evil-ex-delete-hl 'evil-ex-search)
       (evil-ex-search-next count))))
-
-(evil-define-motion +evil-ex-search-selection-forward (count)
-  "Search for the next occurrence of selection."
-  :jump t
-  :type exclusive
-  (interactive (list (prefix-numeric-value current-prefix-arg)))
-  (+evil-ex-start-selected-search 'forward count)
-  (evil-exit-visual-state))
 
 (elpaca evil
   (setup evil
@@ -107,29 +114,40 @@ determining the search direction."
      evil-search-module 'evil-search
      evil-undo-system 'undo-redo)
     (:general
-     (:states '(normal)
-              "<escape>" 'evil-ex-nohighlight
-              "C-'" 'evil-normal-state)
      (:states '(insert)
-              "TAB" 'tab-to-tab-stop
-              "C-'" 'evil-normal-state)
+              "TAB" #'tab-to-tab-stop)
+     (:states '(normal)
+              "U" #'evil-redo
+              "M-j" #'+move-line-down
+              "M-k" #'+move-line-up
+              "C-/" #'evil-commentary-line)
      (:states '(visual)
-              ">" '+evil-shift-right
-              "<" '+evil-shift-left
-              "*" '+evil-ex-search-selection-forward)
+              ">" #'+evil-shift-right
+              "<" #'+evil-shift-left
+              "*" #'+evil-ex-search-selection-forward
+              "C-/" #'evil-commentary-line)
+     (:states '(normal insert)
+              "<escape>" #'+evil-normal-state
+              "C-'" #'+evil-normal-state)
      (:states '(normal visual)
-              "H" 'evil-beginning-of-line
-              "L" 'evil-end-of-line
-              "U" 'evil-redo
-              "M-j" '+move-line-down
-              "M-k" '+move-line-up)
+              "gh" #'evil-first-non-blank
+              "gl" #'evil-last-non-blank
+              "gH" #'evil-beginning-of-line
+              "gL" #'evil-end-of-line)
      (:states '(normal)
               :keymaps '(override)
               :prefix "SPC"
               "qQ" '(evil-quit-all-with-error-code :which-key "Quit Emacs")
               "w"  '(evil-window-map :which-key "window")
               "wd" '(evil-window-delete :which-key "Kill window")))
-    (evil-mode 1)))
+    (evil-mode 1)
+    (evil-define-motion +evil-ex-search-selection-forward (count)
+      "Search for the next occurrence of selection."
+      :jump t
+      :type exclusive
+      (interactive (list (prefix-numeric-value current-prefix-arg)))
+      (+evil-ex-start-selected-search 'forward count)
+      (evil-exit-visual-state))))
 (elpaca-wait) ;; Wait for completion
 
 (elpaca evil-collection
@@ -172,6 +190,10 @@ determining the search direction."
 	           "b" 'evil-textobj-anyblock-a-block
 	           "q" 'evil-textobj-anyblock-a-quote))))
 
+(elpaca evil-mc
+  (setup evil-mc
+    (:load-after evil-mode)
+    (global-evil-mc-mode 1)))
 
 (provide 'init-evil)
 ;; init-evil.el ends here

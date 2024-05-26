@@ -37,9 +37,6 @@
 
 (elpaca company
   (setup company
-    (:general
-     (:keymaps '(company-active-map)
-               "<escape>" '(lambda () (interactive) (company-abort) (evil-normal-state)))) ;; esc should abort company and insert mode
     (:hook-into prog-mode
                 text-mode)))
 
