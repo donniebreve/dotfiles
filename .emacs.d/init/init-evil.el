@@ -114,13 +114,16 @@ determining the search direction."
      evil-search-module 'evil-search
      evil-undo-system 'undo-redo)
     (:general
-     (:states '(insert)
-              "TAB" #'tab-to-tab-stop)
      (:states '(normal)
               "U" #'evil-redo
               "M-j" #'+move-line-down
               "M-k" #'+move-line-up
               "C-/" #'evil-commentary-line)
+     (:states '(insert)
+              "TAB" #'tab-to-tab-stop)
+     (:states '(insert)
+              :keymaps '(term-mode-map term-raw-map)
+              "TAB" #'term-send-raw)
      (:states '(visual)
               ">" #'+evil-shift-right
               "<" #'+evil-shift-left
