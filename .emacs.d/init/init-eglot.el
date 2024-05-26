@@ -78,12 +78,12 @@
                 '(csharp-mode . ("omnisharp" "-lsp")))
    (add-to-list 'eglot-server-programs
                 '(csharp-ts-mode . ("omnisharp" "-lsp"))))
-  (add-hook 'c-mode-hook 'eglot-ensure)
-  (add-hook 'c-ts-mode-hook 'eglot-ensure)
-  (add-hook 'csharp-mode-hook 'eglot-ensure)
-  (add-hook 'csharp-ts-mode-hook 'eglot-ensure)
-  (add-hook 'typescript-ts-mode-hook 'eglot-ensure)
-  (add-hook 'vue-mode-hook 'eglot-ensure))
+  (add-hook 'c-mode-hook #'eglot-ensure)
+  (add-hook 'c-ts-mode-hook #'eglot-ensure)
+  (add-hook 'csharp-mode-hook #'eglot-ensure)
+  (add-hook 'csharp-ts-mode-hook #'eglot-ensure)
+  (add-hook 'typescript-ts-mode-hook #'eglot-ensure)
+  (add-hook 'vue-mode-hook #'eglot-ensure))
 
 (provide 'init-eglot)
 ;; init-eglot.el ends here

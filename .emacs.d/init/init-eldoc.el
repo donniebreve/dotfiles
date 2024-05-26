@@ -147,7 +147,7 @@ trigger and allows use of the echo area."
             :prefix "SPC"
             "ci" '(+eldoc-print-current-symbol-info :which-key "Show documentation")))
   (:after-load
-   (advice-add 'eldoc-display-in-echo-area :override '+eldoc-display-in-echo-area)
+   (advice-add 'eldoc-display-in-echo-area :override #'+eldoc-display-in-echo-area)
    (eldoc-add-command 'eldoc-manual)))
 
 (provide 'init-eldoc)

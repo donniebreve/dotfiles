@@ -80,7 +80,7 @@ kill this session."
                             doom-quit-messages)
                        'face '(italic default)))))
 
-(setq confirm-kill-emacs '+quit)
+(setq confirm-kill-emacs #'+quit)
 
 (provide 'init-confirmation)
 ;; init-confirmation.el ends here

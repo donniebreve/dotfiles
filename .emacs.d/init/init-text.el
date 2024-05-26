@@ -33,7 +33,7 @@
 (setup text-mode
   (:option tab-width 4
            indent-tabs-mode nil) ;; Don't use tabs
-  (:hook visual-line-mode))      ;; Wrap lines in text mode
+  (:hook #'visual-line-mode))    ;; Wrap lines in text mode
 
 (provide 'init-text)
 ;; init-text.el ends here

@@ -49,7 +49,7 @@
             :prefix "SPC"
             "c"  '(:ignore t :which-key "Code")
             "cf" '(+evil-indent-buffer :which-key "Format buffer")))
-  (:hook display-line-numbers-mode)) ;; Show line numbers
+  (:hook #'display-line-numbers-mode)) ;; Show line numbers
 
 (setup emacs-lisp-mode
   (:general

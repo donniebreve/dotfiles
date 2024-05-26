@@ -34,8 +34,9 @@
 
 (elpaca doom-themes
   (setup doom-themes
-    (:face mode-line ((t (:background "#2f3f48"))))
-    (:face mode-line-inactive ((t (:background "#3c4c55"))))
+    ;; (:face mode-line ((t (:background "#2f3f48"))))             ;; preference, I think this looks better
+    ;; (:face mode-line-inactive ((t (:background "#44545d"))))    ;; provides separation for horizontal splits
+    ;; (:face vertico-current ((t (:background "#556873"))))       ;; makes the current selection readable
     (load-theme 'doom-nova t)))
 
 (provide 'init-theme)
