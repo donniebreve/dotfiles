@@ -39,6 +39,9 @@
 
 ;;; Code:
 
+;; Load private files
+(load-file (expand-file-name "private/feeds.el" user-emacs-directory))
+
 ;; Add init files to load path
 (add-to-list 'load-path (expand-file-name "init" user-emacs-directory))
 
@@ -95,6 +98,9 @@
 ;; Terminal
 (require 'init-terminal)
 
+;; Leisure
+(require 'init-elfeed)
+
 ;; Global Emacs keybindings These functions are default Emacs
 ;; functions only. Package initialization may define global
 ;; keybindings as well.
@@ -120,10 +126,16 @@
  ;; Help
  "h"  '(:ignore t :which-key "help")
  "h'" '(describe-char :which-key "Describe char")
+ "hF" '(describe-face :which-key "Describe face")
  ;; Insert
  "i"  '(:ignore t :which-key "insert")
  ;; Open
  "o"  '(:ignore t :which-key "open")
+ ;; Project
+ "p"  '(:ignore t :which-key "project")
+ ;; Package
+ "P"  '(:ignore t :which-key "package")
+ "Pl" '(elpaca-log :which-key "List packages")
  ;; Quit
  "q"  '(:ignore t :which-key "quit")
  "qq" '(save-buffers-kill-emacs :which-key "Quit Emacs"))

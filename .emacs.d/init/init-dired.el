@@ -60,14 +60,13 @@ Dired buffers, and then executes `+dired-omit-mode`."
    (:states '(normal)
             :keymaps '(dired-mode-map)
             "<escape>" '(quit-window :which-key "Quit")
+            [remap dired-do-compress-to] '(dired-create-empty-file :which-key "Create file") ;; c
+            [remap dired-flag-file-deletion] '(dired-create-directory :which-key "Create directory") ;; d
             "h"  '(dired-up-directory :which-key "Go up a directory")
             "j"  '(dired-next-line :which-key "Next line")
             "k"  '(dired-previous-line :which-key "Previous line")
             "l"  '(dired-find-file :which-key "Open file or directory")
-            "zh" '(+dired-omit-mode-toggle :which-key "Toggle file hiding"))
-   ;; For some reason "c" seems impossible to bind/unbind
-   (:keymaps '(dired-mode-map)
-             [remap dired-do-compress-to] 'dired-create-empty-file))
+            "zh" '(+dired-omit-mode-toggle :which-key "Toggle file hiding")))
   (:hook #'+dired-omit-mode))
 
 (elpaca diredfl

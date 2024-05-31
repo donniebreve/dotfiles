@@ -44,7 +44,7 @@
    (:states '(normal)
             :keymaps '(override)
             :prefix "SPC"
-            "ot" '(+ansi-term :which-key "Open terminal"))
+            "ot" '(+ansi-term :which-key "Open Terminal"))
    (:states '(normal)
             :keymaps '(term-mode-map)
             "q" '(kill-current-buffer :which-key "Quit"))))

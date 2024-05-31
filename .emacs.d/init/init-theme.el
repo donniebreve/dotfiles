@@ -38,6 +38,9 @@
     ;; (:face mode-line-inactive ((t (:background "#44545d"))))    ;; provides separation for horizontal splits
     ;; (:face vertico-current ((t (:background "#556873"))))       ;; makes the current selection readable
     (load-theme 'doom-nova t)))
+    ;;(load-theme 'doom-rose-pine t)))
+    ;;(load-theme 'doom-rose-pine-moon t)))
+    ;;(load-theme 'doom-rose-pine-dawn t)))
 
 (provide 'init-theme)
 ;; init-theme.el ends here

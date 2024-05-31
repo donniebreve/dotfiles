@@ -35,7 +35,7 @@
 (elpaca dashboard
   (setup dashboard
     (:option
-     dashboard-startup-banner "~/.emacs.d/banners/sub-zero.txt"
+     dashboard-startup-banner (expand-file-name "banners/sub-zero.txt" user-emacs-directory)
      dashboard-center-content t
      dashboard-filter-agenda-entry 'dashboard-no-filter-agenda
      dashboard-items '((recents  . 5)

@@ -27,10 +27,10 @@
 ;; Window split customizations.
 ;;
 ;; I've never been able to get the splits to work how I want.
-;; So far this seems to be working well.
 
 ;;; Code:
 
+(require 'general)
 (require 'evil)
 
 (setq split-height-threshold 120
@@ -67,14 +67,21 @@ in a side window."
         (display-buffer-use-least-recent-window buffer alist)
       (display-buffer-same-window buffer alist))))
 
-(setq display-buffer-alist
-      '(("\\magit" (display-buffer-reuse-mode-window
-                    display-buffer-reuse-window
-                    +display-buffer-in-pop-up-or-side-window))
-        ("\\*" (display-buffer-reuse-mode-window
-                display-buffer-reuse-window
-                +display-buffer-in-pop-up-or-side-window))))
-;;(setq display-buffer-alist nil)
+;; (setq display-buffer-alist
+;;       '(("\\magit" (display-buffer-reuse-mode-window
+;;                     display-buffer-reuse-window
+;;                     +display-buffer-in-pop-up-or-side-window))
+;;         ("\\*" (display-buffer-reuse-mode-window
+;;                 display-buffer-reuse-window
+;;                 +display-buffer-in-pop-up-or-side-window))))
+(setq display-buffer-alist nil)
+
+(defun +buffer-move-next-window ()
+  "Move the buffer from the current window to the next window."
+  (interactive)
+    (set-window-buffer (next-window) (window-buffer))
+    (previous-buffer)
+    (other-window 1))
 
 (evil-define-command +evil-window-decrease-width (count)
   "Decrease current window width by COUNT. Repeatable."
@@ -97,6 +104,7 @@ in a side window."
    (:states '(normal)
             :keymaps '(override)
             :prefix "SPC"
+            "bL" '(+buffer-move-next-window :which-key "Move buffer to next window")
             "w<" '(+evil-window-decrease-width :which-key "Decrease window width")
             "w>" '(+evil-window-increase-width :which-key "Decrease window width"))))
 

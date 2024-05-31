@@ -69,5 +69,8 @@
 (add-hook 'after-init-hook #'elpaca-process-queues)
 (elpaca `(,@elpaca-order))
 
+(with-eval-after-load 'elpaca-log
+  (setf (alist-get 'elpaca-log elpaca-log-command-queries) "#unique"))
+
 (provide 'init-elpaca)
 ;;; init-elpaca.el ends here

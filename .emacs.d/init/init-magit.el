@@ -39,7 +39,7 @@
 (require 'setup)
 (require 'general)
 
-(elpaca magit
+(elpaca (magit :tag "v3.3.0")
   (setup magit
     (:general
      (:states '(normal)
@@ -105,7 +105,6 @@
               :keymaps '(override)
               :prefix "SPC"
               "pt" '(magit-todos-list :which-key "List project todos")))))
-
 
 (provide 'init-magit)
 ;; init-magit.el ends here

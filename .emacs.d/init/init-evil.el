@@ -171,6 +171,16 @@ determining the search direction."
 (elpaca evil-textobj-anyblock
   (setup evil-textobj-anyblock
     (:load-after evil-mode)
+    (:general
+     (:keymaps '(evil-inner-text-objects-map)
+	           "b" 'evil-textobj-anyblock-inner-block
+	           "q" 'evil-textobj-anyblock-inner-quote)
+     (:keymaps '(evil-outer-text-objects-map)
+	           "b" 'evil-textobj-anyblock-a-block
+	           "q" 'evil-textobj-anyblock-a-quote))
+    ;; This shouldn't be required... not sure what's going on here
+    ;; Without this, evil-textobj-anyblock--make-textobj is not defined
+    (require 'evil-textobj-anyblock)
     ;; Remove quotes from blocks
     (setq evil-textobj-anyblock-blocks '(("(" . ")") ("{" . "}") ("\\[" . "\\]") ("<" . ">"))) 
     ;; Set up quotes separately
@@ -184,14 +194,7 @@ determining the search direction."
       (count &optional beg end type)
       "Select the closest outer quote."
       (let ((evil-textobj-anyblock-blocks evil-textobj-anyblock-quotes))
-	    (evil-textobj-anyblock--make-textobj beg end type count t)))
-    (:general
-     (:keymaps '(evil-inner-text-objects-map)
-	           "b" 'evil-textobj-anyblock-inner-block
-	           "q" 'evil-textobj-anyblock-inner-quote)
-     (:keymaps '(evil-outer-text-objects-map)
-	           "b" 'evil-textobj-anyblock-a-block
-	           "q" 'evil-textobj-anyblock-a-quote))))
+	    (evil-textobj-anyblock--make-textobj beg end type count t)))))
 
 (elpaca evil-mc
   (setup evil-mc
