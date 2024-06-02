@@ -100,6 +100,7 @@
 
 ;; Leisure
 (require 'init-elfeed)
+(require 'init-eww)
 
 ;; Global Emacs keybindings These functions are default Emacs
 ;; functions only. Package initialization may define global
