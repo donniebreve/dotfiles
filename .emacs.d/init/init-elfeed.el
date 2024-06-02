@@ -1,4 +1,4 @@
-;;; init-elfeed.el --- Magit initialization -*- lexical-binding: t; -*-
+;;; init-elfeed.el --- Elfeed initialization -*- lexical-binding: t; -*-
 ;;
 ;; Copyright (C) 2024  donniebreve
 
@@ -24,7 +24,9 @@
 
 ;;; Commentary:
 ;;
-;; Elfeed is an extensible web feed reader for Emacs, supporting both Atom and RSS. It requires Emacs 24.3 and is available for download from MELPA or el-get. Elfeed was inspired by notmuch.
+;; Elfeed is an extensible web feed reader for Emacs, supporting both
+;; Atom and RSS. It requires Emacs 24.3 and is available for download
+;; from MELPA or el-get. Elfeed was inspired by notmuch.
 ;; https://github.com/skeeto/elfeed
 
 ;;; Code:
@@ -34,7 +36,7 @@
 (require 'general)
 
 (defun +elfeed-search-browse-url-eww ()
-  "Visit the current entry in your eww using `eww-browse-url'."
+  "Visit the current entry using `eww-browse-url'."
   (interactive)
   (let ((buffer (current-buffer))
         (entries (elfeed-search-selected)))
@@ -50,12 +52,36 @@
       (unless (or elfeed-search-remain-on-entry (use-region-p))
         (forward-line)))))
 
+(defun +elfeed-search-browse-url-firefox ()
+  "Visit the current entry using `browse-url-firefox'."
+  (interactive)
+  (let ((buffer (current-buffer))
+        (entries (elfeed-search-selected)))
+    (cl-loop for entry in entries
+             do (elfeed-untag entry 'unread)
+             when (elfeed-entry-link entry)
+             do (browse-url-firefox it))
+    ;; `browse-url' could have switched to another buffer if eww or another
+    ;; internal browser is used, but the remainder of the functions needs to
+    ;; run in the elfeed buffer.
+    (with-current-buffer buffer
+      (mapc #'elfeed-search-update-entry entries)
+      (unless (or elfeed-search-remain-on-entry (use-region-p))
+        (forward-line)))))
+
 (defun +elfeed-show-browse-url-eww ()
-  "Visit the current entry in your eww using `eww-browse-url'."
+  "Visit the current entry using `eww-browse-url'."
   (interactive)
   (let ((link (elfeed-entry-link elfeed-show-entry)))
     (when link
       (eww-browse-url link))))
+
+(defun +elfeed-show-browse-url-firefox ()
+  "Visit the current entry using `browse-url-firefox'."
+  (interactive)
+  (let ((link (elfeed-entry-link elfeed-show-entry)))
+    (when link
+      (browse-url-firefox link))))
 
 (elpaca elfeed
   (setup elfeed
@@ -66,12 +92,14 @@
      (general-define-key
       :states '(normal)
       :keymaps '(elfeed-search-mode-map)
-      "gr" '(elfeed-update :which-key "Update")
-      "go" '(+elfeed-search-browse-url-eww :which-key "Open in EWW"))
+      "R"  '(elfeed-update :which-key "Update")
+      "go" '(+elfeed-search-browse-url-eww :which-key "Open in EWW")
+      "gO" '(+elfeed-search-browse-url-firefox :which-key "Open in FireFox"))
      (general-define-key
       :states '(normal)
       :keymaps '(elfeed-show-mode-map)
-      "go" '(+elfeed-show-browse-url-eww :which-key "Open in EWW")))
+      "go" '(+elfeed-show-browse-url-eww :which-key "Open in EWW")
+      "gO" '(+elfeed-show-browse-url-firefox :which-key "Open in FireFox")))
     (:general
      (:states '(normal)
               :keymaps '(override)
