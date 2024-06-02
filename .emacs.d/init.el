@@ -86,6 +86,7 @@
 
 ;; Programming
 (require 'init-prog)
+(require 'init-smartparens)
 (require 'init-avy)
 (require 'init-eglot)
 (require 'init-eldoc)
@@ -128,6 +129,7 @@
  "h"  '(:ignore t :which-key "help")
  "h'" '(describe-char :which-key "Describe char")
  "hF" '(describe-face :which-key "Describe face")
+ "hm" '(describe-mode :which-key "Describe mode")
  ;; Insert
  "i"  '(:ignore t :which-key "insert")
  ;; Open
