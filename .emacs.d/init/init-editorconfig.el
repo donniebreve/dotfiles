@@ -34,7 +34,7 @@
 
 (elpaca editorconfig
   (setup editorconfig
-    (:hook prog-mode)))
+    (:hook-into prog-mode)))
 
 (provide 'init-editorconfig)
 ;; init-editorconfig.el ends here

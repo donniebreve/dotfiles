@@ -37,6 +37,7 @@
 (column-number-mode)                        ; Show column number in modeline
 (display-time-mode t)                       ; Displays the time in the modeline
 (setq frame-resize-pixelwise t)             ; Don't restrict frame size to char size
+(setq frame-inhibit-implied-resize t)       ; Don't change frame size with font size
 (setq use-dialog-box nil)                   ; Don't pop up UI dialogs when prompting
 (setq desktop-save-mode nil)                ; Don't restore desktop
 (setq inhibit-startup-message t)            ; Don't show start up screen
