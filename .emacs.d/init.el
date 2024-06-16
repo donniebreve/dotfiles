@@ -86,15 +86,18 @@
 
 ;; Programming
 (require 'init-prog)
-(require 'init-smartparens)
-(require 'init-avy)
 (require 'init-eglot)
+(require 'init-flymake)
 (require 'init-eldoc)
+(require 'init-avy)
+(require 'init-smartparens)
 (require 'init-magit)
 (require 'init-web-mode)
+(require 'init-terraform-mode)
 (require 'init-editorconfig)
 (require 'init-pcre2el)
 (require 'init-hl-todo)
+(require 'init-whitespace-mode)
 
 ;; Terminal
 (require 'init-terminal)
