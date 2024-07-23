@@ -39,25 +39,26 @@
            '(;; :hoverProvider ;Documentation on hover
              ;; :completionProvider ;Code completion
              ;; :signatureHelpProvider ;Function signature help (Gives arguments when inside parentheses of function)
-             ;; :definitionProvider ;Go to definition
-             ;; :typeDefinitionProvider ;Go to type definition
-             ;; :implementationProvider ;Go to implementation
-             ;; :declarationProvider ;Go to declaration
-             ;; :referencesProvider ;Find references
-             :documentHighlightProvider    ;Highlight symbols automatically
-             :documentSymbolProvider        ;List symbols in buffer
-             :workspaceSymbolProvider      ;List symbols in workspace
+             :definitionProvider ;Go to definition
+             :typeDefinitionProvider ;Go to type definition
+             :implementationProvider ;Go to implementation
+             :declarationProvider ;Go to declaration
+             :referencesProvider ;Find references
+             ;;:documentHighlightProvider    ;Highlight symbols automatically
+             ;;:documentSymbolProvider        ;List symbols in buffer
+             ;;:workspaceSymbolProvider      ;List symbols in workspace
              :codeActionProvider            ;Execute code actions
-             :codeLensProvider              ;Code lens
+             ;;:codeLensProvider              ;Code lens
              :documentFormattingProvider   ;Format buffer
              :documentRangeFormattingProvider ;Format portion of buffer
              :documentOnTypeFormattingProvider ;On-type formatting
              ;; :renameProvider ;Rename symbol
              :documentLinkProvider            ;Highlight links in document
-             :colorProvider                   ;Decorate color references
-             :foldingRangeProvider            ;Fold regions of buffer
+             ;;:colorProvider                   ;Decorate color references
+             ;;:foldingRangeProvider            ;Fold regions of buffer
              :executeCommandProvider          ;Execute custom commands
-             :inlayHintProvider))             ;Inlay hints
+             ;;:inlayHintProvider ;Inlay hints
+             ))
   (:after-load
    (add-to-list 'eglot-server-programs
                 '(vue-mode . ("vue-language-server" "--stdio" :initializationOptions

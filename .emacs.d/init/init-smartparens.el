@@ -5,7 +5,7 @@
 ;; Author: donniebreve <donniebreve@protonmail.com>
 ;; URL: https://github.com/donniebreve/dotfiles/.emacs.d
 ;; Version: 0
-;; Package-Requires: ((emacs "29") (elpaca) (setup) (general))
+;; Package-Requires: ((emacs "29") (elpaca) (setup))
 
 ;; This file is NOT part of GNU Emacs.
 
@@ -33,24 +33,24 @@
 
 (require 'elpaca)
 (require 'setup)
-(require 'general)
 
 (defun +create-newline-and-enter-sexp (&rest _ignored)
   "Open a new brace or bracket expression, with relevant newlines and indent."
   (newline)
   (indent-according-to-mode)
   (forward-line -1)
-  (indent-according-to-mode)
-  (sp-remove-active-pair-overlay))
+  (indent-according-to-mode))
 
 (elpaca smartparens
   (setup smartparens
+    (:option sp-highlight-pair-overlay nil)
     (:hook-into c-mode)
     (:hook-into c-ts-mode)
     (:hook-into csharp-mode)
     (:hook-into csharp-ts-mode)
     (:hook-into emacs-lisp-mode)
     (require 'smartparens)
+    (require 'smartparens-config)
     (dolist (mode '(c-mode c-ts-mode csharp-mode csharp-ts-mode))
       (sp-local-pair mode "{" nil :post-handlers
                      '((+create-newline-and-enter-sexp "RET"))))))

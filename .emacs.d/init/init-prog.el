@@ -43,15 +43,21 @@
   (:option tab-width 4
            indent-tabs-mode nil      ;; Don't use tabs
            truncate-lines t)         ;; Don't wrap lines in programming mode
+  ;; (:general
+  ;;  (:states '(normal)
+  ;;           :definer '(minor-mode)
+  ;;           :keymaps '(emacs-lisp-mode)
+  ;;           :prefix "SPC"
+  ;;           "cf" '(+evil-indent-buffer :which-key "Format buffer")))
   (:general
    (:states '(normal)
             :keymaps '(override)
             :prefix "SPC"
-            "c"  '(:ignore t :which-key "Code")
-            "cf" '(+evil-indent-buffer :which-key "Format buffer")))
+            "c"  '(:ignore t :which-key "Code")))
   (:hook #'display-line-numbers-mode)) ;; Show line numbers
 
 (setup emacs-lisp-mode
+  (:option show-paren-context-when-offscreen t)
   (:general
    (:states '(normal)
             :keymaps '(override)

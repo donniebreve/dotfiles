@@ -74,39 +74,48 @@ in a side window."
 ;;         ("\\*" (display-buffer-reuse-mode-window
 ;;                 display-buffer-reuse-window
 ;;                 +display-buffer-in-pop-up-or-side-window))))
-(setq display-buffer-alist nil)
+;;(setq display-buffer-alist nil)
 
-(defun +buffer-move-next-window ()
-  "Move the buffer from the current window to the next window."
+(defun +buffer-move (direction)
+  "Attempt to move the current buffer to the window in `direction'."
   (interactive)
-    (set-window-buffer (next-window) (window-buffer))
-    (previous-buffer)
-    (other-window 1))
+  (let ((target-window (windmove-find-other-window direction)))
+    (if (not target-window)
+        (message "No window to the %s" direction)
+      (let ((buffer (current-buffer))
+            (previous-buffer (other-buffer)))
+        (set-window-buffer (selected-window) previous-buffer)
+        (select-window target-window)
+        (set-window-buffer (selected-window) buffer)))))
 
-(evil-define-command +evil-window-decrease-width (count)
-  "Decrease current window width by COUNT. Repeatable."
-  :repeat t
-  (interactive "p")
-  (when (eq count 1)
-    (setq count 5))
-  (enlarge-window (- count) t))
+(defun +buffer-move-up ()
+  "Attempt to move the current buffer to the window above."
+  (interactive)
+  (+buffer-move 'up))
 
-(evil-define-command +evil-window-increase-width (count)
-  "Increase current window width by COUNT. Repeatable."
-  :repeat t
-  (interactive "p")
-  (when (eq count 1)
-    (setq count 5))
-  (enlarge-window count t))
+(defun +buffer-move-down ()
+  "Attempt to move the current buffer to the window below."
+  (interactive)
+  (+buffer-move 'down))
 
-(setup evil
-  (:general
-   (:states '(normal)
-            :keymaps '(override)
-            :prefix "SPC"
-            "bL" '(+buffer-move-next-window :which-key "Move buffer to next window")
-            "w<" '(+evil-window-decrease-width :which-key "Decrease window width")
-            "w>" '(+evil-window-increase-width :which-key "Decrease window width"))))
+(defun +buffer-move-left ()
+  "Attempt to move the current buffer to the window to the left."
+  (interactive)
+  (+buffer-move 'left))
+
+(defun +buffer-move-right ()
+  "Attempt to move the current buffer to the window to the right."
+  (interactive)
+  (+buffer-move 'right))
+
+(general-define-key
+ :states '(normal)
+ :keymaps '(override)
+ :prefix "SPC"
+ "bK" '(+buffer-move-up :which-key "Move buffer up")
+ "bJ" '(+buffer-move-down :which-key "Move buffer down")
+ "bH" '(+buffer-move-left :which-key "Move buffer left")
+ "bL" '(+buffer-move-right :which-key "Move buffer right"))
 
 (provide 'init-window)
 ;; init-window.el ends here

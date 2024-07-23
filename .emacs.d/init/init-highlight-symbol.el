@@ -1,4 +1,4 @@
-;;; init-theme.el --- Theming -*- lexical-binding: t -*-
+;;; init-highlight-symbol.el --- highlight-symbol configuration -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2024  donniebreve
 
@@ -24,24 +24,18 @@
 
 ;;; Commentary:
 ;;
-;; Theme setup and customization.
-;; https://github.com/doomemacs/themes
+;; Automatic and manual symbol highlighting for Emacs.
+;; https://github.com/nschum/highlight-symbol.el
 
 ;;; Code:
 
 (require 'elpaca)
 (require 'setup)
 
-(defvar load-theme-hook nil
-  "Hook run after a color theme is loaded using `load-theme'.")
+(elpaca highlight-symbol
+  (setup highlight-symbol
+    (:option highlight-symbol-idle-delay 0.75)
+    (:hook-into prog-mode emacs-lisp-mode)))
 
-(elpaca doom-themes
-  (setup doom-themes
-    (load-theme 'doom-nova t)
-    ;;(load-theme 'doom-rose-pine t)))
-    ;;(load-theme 'doom-rose-pine-moon t)))
-    ;;(load-theme 'doom-rose-pine-dawn t)))
-    (run-hooks 'load-theme-hook)))
-
-(provide 'init-theme)
-;; init-theme.el ends here
+(provide 'init-highlight-symbol)
+;; init-highlight-symbol.el ends here

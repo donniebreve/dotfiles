@@ -34,43 +34,65 @@
 (require 'setup)
 (require 'general)
 
-;; Move line up
 (defun +move-line-up ()
+  "Move the current line up."
   (interactive)
   (transpose-lines 1)
   (previous-line 2))
 
-;; Move line down
 (defun +move-line-down ()
+  "Move the current line down."
   (interactive)
   (next-line 1)
   (transpose-lines 1)
   (previous-line 1))
 
-(defun +evil-shift-right ()
-  (interactive)
-  (evil-shift-right evil-visual-beginning evil-visual-end)
-  (evil-normal-state)
-  (evil-visual-restore))
-
 (defun +evil-shift-left ()
+  "Shift text left and restore visual state."
   (interactive)
   (evil-shift-left evil-visual-beginning evil-visual-end)
   (evil-normal-state)
   (evil-visual-restore))
 
+(defun +evil-shift-right ()
+  "Shift text right and restore visual state."
+  (interactive)
+  (evil-shift-right evil-visual-beginning evil-visual-end)
+  (evil-normal-state)
+  (evil-visual-restore))
+
+(evil-define-motion +evil-smart-beginning-of-line ()
+  "Move the cursor to the first non-blank character, or the beginning
+of the current line."
+  :type exclusive
+  (evil-narrow-to-line (let ((position (point)))
+                         (back-to-indentation)
+                         (if (= position (point))
+                             (beginning-of-line)))))
+
+(evil-define-motion +evil-smart-end-of-line (count)
+  "Move the cursor to the last non-blank character, or the end of the
+current line."
+  :type inclusive
+  (let ((position (point)))
+    (evil-move-end-of-line count)
+    (skip-chars-backward " \t")
+    (unless (bolp) (backward-char))
+    (if (= position (point))
+        (end-of-line))))
+
 (defun +evil-normal-state ()
   "Returns to `evil-normal-state'.
-When in insert mode, abort company suggestions and then go to normal mode.
 When in normal mode, abort multiple cursors and then go to normal mode.
+When in insert mode, abort company suggestions and then go to normal mode.
 Always quit highlighting."
   (interactive)
-  (if (eq evil-state 'normal)
-      (if (fboundp 'evil-mc-undo-all-cursors)
-          (evil-mc-undo-all-cursors)))
-  (if (eq evil-state 'insert)
-      (if (fboundp 'company-active-map)
-          (company-abort)))
+  (when (and (eq evil-state 'normal)
+             (fboundp 'evil-mc-undo-all-cursors))
+    (evil-mc-undo-all-cursors))
+  (when (and (eq evil-state 'insert)
+             (fboundp 'company-abort))
+    (company-abort))
   (evil-ex-nohighlight)
   (evil-normal-state))
 
@@ -133,17 +155,31 @@ determining the search direction."
               "<escape>" #'+evil-normal-state
               "C-'" #'+evil-normal-state)
      (:states '(normal visual)
-              "gh" #'evil-first-non-blank
-              "gl" #'evil-last-non-blank
-              "gH" #'evil-beginning-of-line
-              "gL" #'evil-end-of-line)
+              "gh" #'+evil-smart-beginning-of-line
+              "gl" #'+evil-smart-end-of-line)
      (:states '(normal)
               :keymaps '(override)
               :prefix "SPC"
               "qQ" '(evil-quit-all-with-error-code :which-key "Quit Emacs")
               "w"  '(evil-window-map :which-key "window")
-              "wd" '(evil-window-delete :which-key "Kill window")))
+              "wd" '(evil-window-delete :which-key "Kill window")
+              "w<" '(+evil-window-decrease-width :which-key "Decrease window width")
+              "w>" '(+evil-window-increase-width :which-key "Decrease window width")))
     (evil-mode 1)
+    (evil-define-command +evil-window-decrease-width (count)
+      "Decrease current window width by COUNT. Repeatable."
+      :repeat t
+      (interactive "p")
+      (when (eq count 1)
+        (setq count 5))
+      (enlarge-window (- count) t))
+    (evil-define-command +evil-window-increase-width (count)
+      "Increase current window width by COUNT. Repeatable."
+      :repeat t
+      (interactive "p")
+      (when (eq count 1)
+        (setq count 5))
+      (enlarge-window count t))
     (evil-define-motion +evil-ex-search-selection-forward (count)
       "Search for the next occurrence of selection."
       :jump t
@@ -178,8 +214,6 @@ determining the search direction."
      (:keymaps '(evil-outer-text-objects-map)
 	           "b" 'evil-textobj-anyblock-a-block
 	           "q" 'evil-textobj-anyblock-a-quote))
-    ;; This shouldn't be required... not sure what's going on here
-    ;; Without this, evil-textobj-anyblock--make-textobj is not defined
     (require 'evil-textobj-anyblock)
     ;; Remove quotes from blocks
     (setq evil-textobj-anyblock-blocks '(("(" . ")") ("{" . "}") ("\\[" . "\\]") ("<" . ">"))) 

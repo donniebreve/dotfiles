@@ -30,8 +30,15 @@
 
 (defconst env-graphic-p (display-graphic-p))
 (defconst env-root-p (string-equal "root" (getenv "USER")))
+
 (defconst env-sys-mac-p (eq system-type 'darwin))
 (defconst env-sys-linux-p (eq system-type 'gnu/linux))
+(defconst env-sys-windows-p
+  (or
+   (eq system-type 'ms-dos)
+   (eq system-type 'windows-nt)
+   (eq system-type 'cygwin)))
+
 (defconst env-sys-name (system-name))
 
 ;; The default memory setting is too low for lsp/eglot due to the fact that client/server communication generates a lot of memory/garbage. This is 100mb.
@@ -62,6 +69,15 @@
 ;; arguments aren't exactly the same. Really, Emacs should do this by
 ;; default.
 (setq find-program (executable-find "find"))
+
+(defun +advice-remove-all (symbol)
+  "Remove all advice from symbol SYMBOL."
+  (interactive)
+  (message "advice for: %s" symbol)
+  (advice--symbol-function symbol)
+  (advice-mapc (lambda (function _props)
+                 (message "removing: %s" function)
+                 (advice-remove symbol function)) symbol))
 
 (provide 'init-env)
 ;;; init-env.el ends here

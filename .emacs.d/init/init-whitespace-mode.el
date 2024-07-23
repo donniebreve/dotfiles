@@ -32,9 +32,8 @@
 ;; Workaround taken from company-mode github.
 ;;
 ;; '?' is the elisp syntax for "character". "?a" -> (97 a).  Lots of
-;; examples use '?\' for space, but '? ' works as well, and doesn't
-;; leave you saying... um, what?  When displaying newline or tab, we
-;; have to instringuct whitespace mode to show the character we want and
+;; examples use '?\ ' for space.  When displaying newline or tab, we
+;; have to instruct whitespace mode to show the character we want and
 ;; then still show the special character. This is the reason for, for
 ;; example, [?» ?\t].
 
@@ -65,7 +64,7 @@
 
 ;; Use company-mode workaround
 ;; Using " +" rather than " " might improve performance a little bit
-(defun +add-whitespace-space-face (string)
+(defun +company--add-whitespace-space-face (string)
   (if (and (or global-whitespace-mode whitespace-mode)
            (memq 'space-mark whitespace-active-style)
            (memq 'face whitespace-active-style)

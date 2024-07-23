@@ -1,11 +1,11 @@
-;;; init-theme.el --- Theming -*- lexical-binding: t -*-
+;;; init-hideshow.el --- Hideshow configuration -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2024  donniebreve
 
 ;; Author: donniebreve <donniebreve@protonmail.com>
 ;; URL: https://github.com/donniebreve/dotfiles/.emacs.d
 ;; Version: 0
-;; Package-Requires: ((emacs "29") (elpaca) (setup))
+;; Package-Requires: ((emacs "29") (setup))
 
 ;; This file is NOT part of GNU Emacs.
 
@@ -24,24 +24,29 @@
 
 ;;; Commentary:
 ;;
-;; Theme setup and customization.
-;; https://github.com/doomemacs/themes
+;; Hideshow is a universal on-the-fly syntax checker for Emacs.
+;; https://www.gnu.org/software/emacs/manual/html_node/hideshow/index.html#Top
 
 ;;; Code:
 
-(require 'elpaca)
 (require 'setup)
 
-(defvar load-theme-hook nil
-  "Hook run after a color theme is loaded using `load-theme'.")
+(defun +hs-hide-block (original-function &rest args)
+  (interactive)
+  (save-excursion
+    (end-of-line)
+    (apply original-function args)))
+(advice-add #'hs-hide-block :around #'+hs-hide-block)
 
-(elpaca doom-themes
-  (setup doom-themes
-    (load-theme 'doom-nova t)
-    ;;(load-theme 'doom-rose-pine t)))
-    ;;(load-theme 'doom-rose-pine-moon t)))
-    ;;(load-theme 'doom-rose-pine-dawn t)))
-    (run-hooks 'load-theme-hook)))
+(defun +hs-show-block (original-function &rest args)
+  (interactive)
+  (save-excursion
+    (beginning-of-line)
+    (apply original-function args)))
+(advice-add #'hs-show-block :around #'+hs-show-block)
 
-(provide 'init-theme)
-;; init-theme.el ends here
+(setup hideshow
+  (:hook-into prog-mode))
+
+(provide 'init-hideshow)
+;; init-hideshow.el ends here
