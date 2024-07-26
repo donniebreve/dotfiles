@@ -61,26 +61,6 @@
   (evil-normal-state)
   (evil-visual-restore))
 
-(evil-define-motion +evil-smart-beginning-of-line ()
-  "Move the cursor to the first non-blank character, or the beginning
-of the current line."
-  :type exclusive
-  (evil-narrow-to-line (let ((position (point)))
-                         (back-to-indentation)
-                         (if (= position (point))
-                             (beginning-of-line)))))
-
-(evil-define-motion +evil-smart-end-of-line (count)
-  "Move the cursor to the last non-blank character, or the end of the
-current line."
-  :type inclusive
-  (let ((position (point)))
-    (evil-move-end-of-line count)
-    (skip-chars-backward " \t")
-    (unless (bolp) (backward-char))
-    (if (= position (point))
-        (end-of-line))))
-
 (defun +evil-normal-state ()
   "Returns to `evil-normal-state'.
 When in normal mode, abort multiple cursors and then go to normal mode.
@@ -166,6 +146,24 @@ determining the search direction."
               "w<" '(+evil-window-decrease-width :which-key "Decrease window width")
               "w>" '(+evil-window-increase-width :which-key "Decrease window width")))
     (evil-mode 1)
+    (evil-define-motion +evil-smart-beginning-of-line ()
+      "Move the cursor to the first non-blank character, or the beginning
+of the current line."
+      :type exclusive
+      (evil-narrow-to-line (let ((position (point)))
+                             (back-to-indentation)
+                             (if (= position (point))
+                                 (beginning-of-line)))))
+    (evil-define-motion +evil-smart-end-of-line (count)
+      "Move the cursor to the last non-blank character, or the end of the
+current line."
+      :type inclusive
+      (let ((position (point)))
+        (evil-move-end-of-line count)
+        (skip-chars-backward " \t")
+        (unless (bolp) (backward-char))
+        (if (= position (point))
+            (end-of-line))))
     (evil-define-command +evil-window-decrease-width (count)
       "Decrease current window width by COUNT. Repeatable."
       :repeat t

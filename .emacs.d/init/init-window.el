@@ -108,6 +108,17 @@ in a side window."
   (interactive)
   (+buffer-move 'right))
 
+(defun +window-dedicate-toggle ()
+  "Toggle dedicate the current window."
+  (interactive)
+  (let ((window (selected-window)))
+    (if (window-dedicated-p window)
+        (progn
+          (set-window-dedicated-p window nil)
+          (message "Window is no longer dedicated"))
+      (set-window-dedicated-p window t)
+      (message "Window is now dedicated"))))
+
 (general-define-key
  :states '(normal)
  :keymaps '(override)
@@ -115,7 +126,8 @@ in a side window."
  "bK" '(+buffer-move-up :which-key "Move buffer up")
  "bJ" '(+buffer-move-down :which-key "Move buffer down")
  "bH" '(+buffer-move-left :which-key "Move buffer left")
- "bL" '(+buffer-move-right :which-key "Move buffer right"))
+ "bL" '(+buffer-move-right :which-key "Move buffer right")
+ "wa" '(+window-dedicate-toggle :which-key "Toggle dedicate window (anchor)"))
 
 (provide 'init-window)
 ;; init-window.el ends here
