@@ -43,19 +43,19 @@ function archnews_format_item_short
 end
 
 function archnews -d 'arch news commands'
-    argparse -n archnews 'h/help' 'l/long=' 's/short=' -- $argv
+    argparse -n archnews h/help 'l/long=' 's/short=' -- $argv
     or return
 
-    set long 0 
+    set long 0
     set short 0
 
     if set -q _flag_help
-      echo "Print Arch Linux's news RSS feed"
-      echo "Usage: archnews [--long count] [--short count]"
-      echo "Example: archnews: Pretty print all items"
-      echo "Example: archnews --long 3: Fully print three items"
-      echo "Example: archnews --long 3 --short 2: Fully print three items, then shortly print two items"
-      echo "Example: archnews --long 0 --short 2: Shortly print two items"
+        echo "Print Arch Linux's news RSS feed"
+        echo "Usage: archnews [--long count] [--short count]"
+        echo "Example: archnews: Pretty print all items"
+        echo "Example: archnews --long 3: Fully print three items"
+        echo "Example: archnews --long 3 --short 2: Fully print three items, then shortly print two items"
+        echo "Example: archnews --long 0 --short 2: Shortly print two items"
     end
 
     if set -q _flag_long
@@ -67,25 +67,25 @@ function archnews -d 'arch news commands'
     end
 
     if test $long -le 0 -a $short -le 0
-      return
+        return
     end
 
     set response (curl -s "https://archlinux.org/feeds/news/")
     set items (echo $response | xmllint --xpath '//item' -)
 
     if test $long -gt 0
-      for i in (seq 1 $long)
-        set item $items[$i]
-        archnews_format_item $item
-      end
+        for i in (seq 1 $long)
+            set item $items[$i]
+            archnews_format_item $item
+        end
     end
 
     if test $short -gt 0
-      set end (math "$long + $short")
-      set start (math "$long + 1")
-      for i in (seq $start $end)
-        set item $items[$i]
-        archnews_format_item_short $item
-      end
+        set end (math "$long + $short")
+        set start (math "$long + 1")
+        for i in (seq $start $end)
+            set item $items[$i]
+            archnews_format_item_short $item
+        end
     end
 end
