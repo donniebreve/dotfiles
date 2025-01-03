@@ -75,6 +75,14 @@ require("lazy").setup({
       config = function()
         require("lsp-format").setup {}
         require("lspconfig").lua_ls.setup {
+          -- Tell lua lsp to ignore vim global
+          settings = {
+            Lua = {
+              diagnostics = {
+                globals = { 'vim' }
+              }
+            }
+          },
           on_attach = require("lsp-format").on_attach
         }
         require("lspconfig").omnisharp.setup {
