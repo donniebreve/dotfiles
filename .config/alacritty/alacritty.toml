@@ -1,0 +1,15 @@
+[window]
+title = "Alacritty"
+
+[window.dimensions]
+columns = 128
+lines = 36
+
+[font]
+size = 11.0
+
+[font.normal]
+family = "JetBrains Mono"
+
+[general]
+import = ["kanagawa-wave.toml"]
