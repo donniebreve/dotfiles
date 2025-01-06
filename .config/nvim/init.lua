@@ -59,10 +59,11 @@ require("lazy").setup({
         require("cmp_nvim_lsp").default_capabilities()
         require("cmp").setup({
           sources = require("cmp").config.sources({
-            { name = "nvim_lsp", priority = 1000 },
+            { name = "nvim_lsp",                priority = 1000 },
+            { name = "nvim_lsp_signature_help", priority = 999 },
             --{ name = "luasnip", priority = 750 },
-            { name = "buffer",   priority = 500 },
-            { name = "path",     priority = 250 },
+            { name = "buffer",                  priority = 500 },
+            { name = "path",                    priority = 250 },
           })
         })
       end
@@ -71,7 +72,10 @@ require("lazy").setup({
     -- Provides easy LSP configuration
     {
       "neovim/nvim-lspconfig",
-      dependencies = { "lukas-reineke/lsp-format.nvim" },
+      dependencies = {
+        { "lukas-reineke/lsp-format.nvim" },
+        { "hoffs/omnisharp-extended-lsp.nvim" }
+      },
       config = function()
         require("lsp-format").setup {}
         require("lspconfig").lua_ls.setup {
@@ -82,8 +86,8 @@ require("lazy").setup({
                 globals = { 'vim' }
               }
             }
-          },
-          on_attach = require("lsp-format").on_attach
+          }
+          --,on_attach = require("lsp-format").on_attach
         }
         require("lspconfig").omnisharp.setup {
           cmd = { "omnisharp", "-lsp" },
