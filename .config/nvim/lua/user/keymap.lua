@@ -33,10 +33,10 @@ set({ "n" }, "<leader>wh", "<C-w>h", options)
 set({ "n" }, "<leader>wj", "<C-w>j", options)
 set({ "n" }, "<leader>wk", "<C-w>k", options)
 set({ "n" }, "<leader>wl", "<C-w>l", options)
-set({ "n" }, "<M-h>", "<cmd>vertical resize -2<cr>", { desc = "Decrease window width", remap = true })
-set({ "n" }, "<M-j>", "<cmd>resize -2<cr>", { desc = "Decrease window height", remap = true })
-set({ "n" }, "<M-k>", "<cmd>resize -2<cr>", { desc = "Increase window height", remap = true })
-set({ "n" }, "<M-l>", "<cmd>vertical resize +2<cr>", { desc = "Increase window width", remap = true })
+set({ "n" }, "<S-A-h>", "<cmd>vertical resize -2<cr>", { desc = "Decrease window width", remap = true })
+set({ "n" }, "<S-A-j>", "<cmd>resize -2<cr>", { desc = "Decrease window height", remap = true })
+set({ "n" }, "<S-A-k>", "<cmd>resize -2<cr>", { desc = "Increase window height", remap = true })
+set({ "n" }, "<S-A-l>", "<cmd>vertical resize +2<cr>", { desc = "Increase window width", remap = true })
 
 -- Searching
 ----
@@ -48,17 +48,21 @@ set({ "n" }, "<leader>b]", "<cmd>bn<cr>", options)                              
 set({ "n" }, "<leader>bp", "<cmd>bp<cr>", options)                                                        -- navigate to the previous buffer
 set({ "n" }, "<leader>b[", "<cmd>bp<cr>", options)                                                        -- navigate to the previous buffer
 set({ "n" }, "<leader>bd", "<cmd>bd<cr>", options)                                                        -- kill the buffer
-set({ "n" }, "<leader>bk", "<cmd>bd<cr>", options)                                                        -- kill the buffer
 --set({ "n" }, "<leader>bx", "<cmd>lua require('user.scratch').toggle_scratch()<cr>", options) -- pop up scratch buffer, haven't figured this out yet
 --set({ "n" }, "<leader>bX", "<cmd>lua require('user.scratch').switch_to_scratch()<cr>", options) -- switch to scratch buffer, haven't figured this out yet
 set({ "n" }, "<leader>by", "<cmd>%y<cr>", options)                                                                       -- yank the buffer
 set({ "n" }, "<leader>:", "<cmd>lua require('telescope.builtin').command_history()<cr>", options)                        -- search previous commands
 set({ "n" }, "<leader>fr", "<cmd>lua require('telescope.builtin').oldfiles()<cr>", options)                              -- search recent files
-set({ "n" }, "<leader>fp", "<cmd>lua require('telescope.builtin').find_files({ cwd = '~/.config/nvim/' })<cr>", options) -- search config files
-set({ "n" }, "<leader>pf", "<cmd>lua require('telescope.builtin').find_files()<cr>", options)                            -- search files in the project (cwd)
+set({ "n" }, "<leader>fp", "<cmd>lua require('telescope.builtin').find_files()<cr>", options) -- search files in project (cwd)
+set({ "n" }, "<leader>fP", "<cmd>lua require('telescope.builtin').find_files({ cwd = '~/.config/nvim/' })<cr>", options) -- search private (config) files
+
+-- Coding
+set({ "n" }, "gd", "<cmd>lua require('omnisharp_extended').lsp_definition()<cr>", options)
+set({ "n" }, "gD", "<cmd>lua require('omnisharp_extended').lsp_type_definition()<cr>", options)
+set({ "n" }, "gr", "<cmd>lua require('omnisharp_extended').lsp_references()<cr>", options)
+set({ "n" }, "gi", "<cmd>lua require('omnisharp_extended').lsp_implementation()<cr>", options)
 
 -- Editing
-----
 -- Remap for dealing with word wrap
 set({ "n" }, "k", 'v:count == 0 ? "gk" : "k"', { noremap = true, expr = true, silent = true })
 set({ "n" }, "j", 'v:count == 0 ? "gj" : "j"', { noremap = true, expr = true, silent = true })
@@ -75,8 +79,8 @@ set({ "n", "v" }, "<C-u>", "10kzz", options)
 set({ "n" }, "U", "<C-r>", options)
 
 -- Don't clobber register on visual paste
-set({ "v" }, "p", '"_dP', options)
-set({ "v" }, "P", '"_dp', options)
+set({ "v" }, "p", '"_dp', options)
+set({ "v" }, "P", '"_dP', options)
 -- Don't clobber on delete or change
 set({ "n" }, "x", '"_x', options)
 set({ "n" }, "c", '"_c', options)
@@ -99,7 +103,7 @@ set({ "n" }, "Y", "y$", options)
 --set({ "n" }, "dw", "diw", options)
 
 -- Rename
-set({ "n" }, "gr", vim.lsp.buf.rename, options)
+--set({ "n" }, "gr", vim.lsp.buf.rename, options)
 set({ "n" }, "<leader>rr", vim.lsp.buf.rename, options)
 
 --local termoptions = { noremap = true, silent = true }
