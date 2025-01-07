@@ -10,57 +10,52 @@ vim.g.maplocalleader = " "
 
 -- General
 ----
-set({ "n" }, "<leader>qq", "<cmd>qa<cr>", options) -- quit nvim
-set({ "n" }, "<leader>fs", "<cmd>w<cr>", options)  -- save file
---set({ "n" }, "<leader>e", "<cmd>Explore<cr>", options) -- open project file browser
---set({ "n" }, "<leader>pe", "<cmd>Telescope find_files<cr>", options) -- open project file browser
-set({ "n" }, "<leader>fd", "<cmd>Drex %:h<cr>", options) -- open relative file browser
-set({ "n" }, "<leader>gg", "<cmd>Neogit<cr>", options)
-set({ "n" }, "<esc>", "<cmd>noh<cr><esc>", { desc = "Escape and clear hlsearch", noremap = true })
+set({ "n" }, "<leader>qq", "<cmd>qa<CR>", options) -- quit nvim
+set({ "n" }, "<leader>fs", "<cmd>w<CR>", options)  -- save file
+--set({ "n" }, "<leader>e", "<cmd>Explore<CR>", options) -- open project file browser
+--set({ "n" }, "<leader>pe", "<cmd>Telescope find_files<CR>", options) -- open project file browser
+set({ "n" }, "<leader>fd", "<cmd>Explore<CR>", options) -- open relative file browser
+set({ "n" }, "<leader>gg", "<cmd>Neogit<CR>", options)
+set({ "n" }, "<Esc>", "<cmd>noh<CR><esc>", { desc = "Escape and clear hlsearch", noremap = true })
 
 -- Tabs (Workspaces)
 -- Tabs in vim are not like workspaces exactly (even though they contain a list of buffers)
 -- Something I want is the ability to switch between projects quickly while keeping vim open
 -- Needs some more investigation here
---set({ "n" }, "<leader><tab>.", "<cmd>Telescope telescope-tabs list_tabs<cr>", options)
+--set({ "n" }, "<leader><tab>.", "<cmd>Telescope telescope-tabs list_tabs<CR>", options)
 
 -- Windows
-set({ "n" }, "<leader>wc", "<C-w>c", options)
 set({ "n" }, "<leader>wd", "<C-w>c", options)
-set({ "n" }, "<leader>ws", "<cmd>split<cr>", options)
-set({ "n" }, "<leader>wv", "<cmd>vsplit<cr>", options)
+set({ "n" }, "<leader>ws", "<cmd>split<CR>", options)
+set({ "n" }, "<leader>wv", "<cmd>vsplit<CR>", options)
 set({ "n" }, "<leader>wh", "<C-w>h", options)
 set({ "n" }, "<leader>wj", "<C-w>j", options)
 set({ "n" }, "<leader>wk", "<C-w>k", options)
 set({ "n" }, "<leader>wl", "<C-w>l", options)
-set({ "n" }, "<S-A-h>", "<cmd>vertical resize -2<cr>", { desc = "Decrease window width", remap = true })
-set({ "n" }, "<S-A-j>", "<cmd>resize -2<cr>", { desc = "Decrease window height", remap = true })
-set({ "n" }, "<S-A-k>", "<cmd>resize -2<cr>", { desc = "Increase window height", remap = true })
-set({ "n" }, "<S-A-l>", "<cmd>vertical resize +2<cr>", { desc = "Increase window width", remap = true })
+set({ "n" }, "<S-A-h>", "<cmd>vertical resize -2<CR>", { desc = "Decrease window width", remap = true })
+set({ "n" }, "<S-A-j>", "<cmd>resize -2<CR>", { desc = "Decrease window height", remap = true })
+set({ "n" }, "<S-A-k>", "<cmd>resize -2<CR>", { desc = "Increase window height", remap = true })
+set({ "n" }, "<S-A-l>", "<cmd>vertical resize +2<CR>", { desc = "Increase window width", remap = true })
 
 -- Searching
 ----
 -- A lot of these are taken from DOOM Emacs / Spacemacs
-set({ "n" }, "<leader>/", "<cmd>Telescope live_grep<cr>", options)                                        -- fuzzy search all files in project (cwd)
-set({ "n" }, "<leader>,", "<cmd>Telescope buffers show_all_buffers=true sort_lastused=true<cr>", options) -- search buffers, default selection is always the last buffer
-set({ "n" }, "<leader>bn", "<cmd>bn<cr>", options)                                                        -- navigate to the next buffer
-set({ "n" }, "<leader>b]", "<cmd>bn<cr>", options)                                                        -- navigate to the next buffer
-set({ "n" }, "<leader>bp", "<cmd>bp<cr>", options)                                                        -- navigate to the previous buffer
-set({ "n" }, "<leader>b[", "<cmd>bp<cr>", options)                                                        -- navigate to the previous buffer
-set({ "n" }, "<leader>bd", "<cmd>bd<cr>", options)                                                        -- kill the buffer
---set({ "n" }, "<leader>bx", "<cmd>lua require('user.scratch').toggle_scratch()<cr>", options) -- pop up scratch buffer, haven't figured this out yet
---set({ "n" }, "<leader>bX", "<cmd>lua require('user.scratch').switch_to_scratch()<cr>", options) -- switch to scratch buffer, haven't figured this out yet
-set({ "n" }, "<leader>by", "<cmd>%y<cr>", options)                                                                       -- yank the buffer
-set({ "n" }, "<leader>:", "<cmd>lua require('telescope.builtin').command_history()<cr>", options)                        -- search previous commands
-set({ "n" }, "<leader>fr", "<cmd>lua require('telescope.builtin').oldfiles()<cr>", options)                              -- search recent files
-set({ "n" }, "<leader>fp", "<cmd>lua require('telescope.builtin').find_files()<cr>", options) -- search files in project (cwd)
-set({ "n" }, "<leader>fP", "<cmd>lua require('telescope.builtin').find_files({ cwd = '~/.config/nvim/' })<cr>", options) -- search private (config) files
+set({ "n" }, "<leader>/", "<cmd>Telescope live_grep<CR>", options)                                        -- fuzzy search all files in project (cwd)
+set({ "n" }, "<leader>,", "<cmd>Telescope buffers show_all_buffers=true sort_lastused=true<CR>", options) -- search buffers, default selection is always the last buffer
+set({ "n" }, "<leader>bn", "<cmd>bn<CR>", options)                                                        -- navigate to the next buffer
+set({ "n" }, "<leader>b]", "<cmd>bn<CR>", options)                                                        -- navigate to the next buffer
+set({ "n" }, "<leader>bp", "<cmd>bp<CR>", options)                                                        -- navigate to the previous buffer
+set({ "n" }, "<leader>b[", "<cmd>bp<CR>", options)                                                        -- navigate to the previous buffer
+set({ "n" }, "<leader>bd", "<cmd>bd<CR>", options)                                                        -- kill the buffer
+--set({ "n" }, "<leader>bx", "<cmd>lua require('user.scratch').toggle_scratch()<CR>", options) -- pop up scratch buffer, haven't figured this out yet
+--set({ "n" }, "<leader>bX", "<cmd>lua require('user.scratch').switch_to_scratch()<CR>", options) -- switch to scratch buffer, haven't figured this out yet
+set({ "n" }, "<leader>by", "<cmd>%y<CR>", options)                                                                       -- yank the buffer
+set({ "n" }, "<leader>:", "<cmd>lua require('telescope.builtin').command_history()<CR>", options)                        -- search previous commands
+set({ "n" }, "<leader>fr", "<cmd>lua require('telescope.builtin').oldfiles()<CR>", options)                              -- search recent files
+set({ "n" }, "<leader>fp", "<cmd>lua require('telescope.builtin').find_files({ cwd = '~/.config/nvim/' })<CR>", options) -- search private (config) files
 
--- Coding
-set({ "n" }, "gd", "<cmd>lua require('omnisharp_extended').lsp_definition()<cr>", options)
-set({ "n" }, "gD", "<cmd>lua require('omnisharp_extended').lsp_type_definition()<cr>", options)
-set({ "n" }, "gr", "<cmd>lua require('omnisharp_extended').lsp_references()<cr>", options)
-set({ "n" }, "gi", "<cmd>lua require('omnisharp_extended').lsp_implementation()<cr>", options)
+-- Projects
+set({ "n" }, "<leader>pf", "<cmd>lua require('telescope.builtin').find_files()<CR>", options) -- search files in project (cwd)
 
 -- Editing
 -- Remap for dealing with word wrap
@@ -106,6 +101,6 @@ set({ "n" }, "Y", "y$", options)
 --set({ "n" }, "gr", vim.lsp.buf.rename, options)
 set({ "n" }, "<leader>rr", vim.lsp.buf.rename, options)
 
---local termoptions = { noremap = true, silent = true }
---set("t", "<C-h>", "<C-\\><C-N><C-w>h", term_opts)
---set("t", "<C-j>", "<C-\\><C-N><C-w>j", term_opts)
+-- Terminal
+local termoptions = { noremap = true, silent = true }
+set("t", "<Esc>", "<C-\\><C-N>", termoptions)
