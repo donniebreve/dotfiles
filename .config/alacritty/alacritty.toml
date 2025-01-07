@@ -12,4 +12,4 @@ size = 11.0
 family = "JetBrains Mono"
 
 [general]
-import = ["kanagawa-wave.toml"]
+import = ["themes/kanagawa-paper.toml"]
