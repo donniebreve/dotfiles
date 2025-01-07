@@ -50,7 +50,9 @@ require("lazy").setup({
       "hrsh7th/nvim-cmp",
       dependencies = {
         { "hrsh7th/cmp-buffer" },
-        { "hrsh7th/cmp-nvim-lsp" }
+        { "hrsh7th/cmp-nvim-lsp" },
+        { "hrsh7th/cmp-nvim-lsp-signature-help" },
+        { "hrsh7th/cmp-nvim-lsp-document-symbol" }
       },
       config = function()
         require("cmp_nvim_lsp").default_capabilities()
@@ -64,11 +66,12 @@ require("lazy").setup({
             ['<CR>'] = cmp.mapping.confirm({ select = true })
           }),
           sources = require("cmp").config.sources({
-            { name = "nvim_lsp",                priority = 1000 },
-            { name = "nvim_lsp_signature_help", priority = 999 },
+            { name = "nvim_lsp",                 priority = 1000 },
+            { name = "nvim_lsp_signature_help",  priority = 900 },
+            { name = "nvim_lsp_document_symbol", priority = 901 },
             --{ name = "luasnip", priority = 750 },
-            { name = "buffer",                  priority = 500 },
-            { name = "path",                    priority = 250 },
+            { name = "buffer",                   priority = 500 },
+            { name = "path",                     priority = 250 },
           })
         })
       end
@@ -96,7 +99,9 @@ require("lazy").setup({
         }
         local set = vim.keymap.set
         local options = { noremap = true }
+        set({ "n" }, "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", options)
         set({ "n" }, "<leader>cf", "<cmd>lua vim.lsp.buf.format()<CR>", options)
+        set({ "n" }, "<leader>ci", "<cmd>lua vim.lsp.buf.hover()<CR>", options)
         set({ "n" }, "gd", "<cmd>lua require('omnisharp_extended').lsp_definition()<CR>", options)
         set({ "n" }, "gD", "<cmd>lua require('omnisharp_extended').lsp_type_definition()<CR>", options)
         set({ "n" }, "gr", "<cmd>lua require('omnisharp_extended').lsp_references()<CR>", options)
@@ -108,7 +113,7 @@ require("lazy").setup({
     {
       "nvim-treesitter/nvim-treesitter",
       dependencies = { "nvim-treesitter/nvim-treesitter-context" },
-      config = function ()
+      config = function()
         require("nvim-treesitter.configs").setup {
           ensure_installed = { "c", "html", "lua", "query", "markdown", "markdown_inline", "vim", "vimdoc" },
           sync_install = false,
@@ -136,6 +141,17 @@ require("lazy").setup({
             },
           },
         })
+        local set = vim.keymap.set
+        local options = { noremap = true }
+
+        set({ "n" }, "<leader>/", "<cmd>Telescope live_grep<CR>", options) -- fuzzy search all files in project (cwd)
+        set({ "n" }, "<leader>,", "<cmd>Telescope buffers show_all_buffers=true sort_lastused=true<CR>", options) -- search buffers, default selection is always the last buffer
+        set({ "n" }, "<leader>:", "<cmd>lua require('telescope.builtin').command_history()<CR>", options) -- search previous commands
+
+        set({ "n" }, "<leader>fr", "<cmd>lua require('telescope.builtin').oldfiles()<CR>", options) -- search recent files
+        set({ "n" }, "<leader>fp", "<cmd>lua require('telescope.builtin').find_files({ cwd = '~/.config/nvim/' })<CR>", options) -- search private (config) files
+
+        set({ "n" }, "<leader>pf", "<cmd>lua require('telescope.builtin').find_files()<CR>", options) -- search files in project (cwd)
       end
     },
 

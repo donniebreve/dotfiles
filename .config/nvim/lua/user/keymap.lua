@@ -13,7 +13,6 @@ vim.g.maplocalleader = " "
 set({ "n" }, "<leader>qq", "<cmd>qa<CR>", options) -- quit nvim
 set({ "n" }, "<leader>fs", "<cmd>w<CR>", options)  -- save file
 --set({ "n" }, "<leader>e", "<cmd>Explore<CR>", options) -- open project file browser
---set({ "n" }, "<leader>pe", "<cmd>Telescope find_files<CR>", options) -- open project file browser
 set({ "n" }, "<leader>fd", "<cmd>Explore<CR>", options) -- open relative file browser
 set({ "n" }, "<leader>gg", "<cmd>Neogit<CR>", options)
 set({ "n" }, "<Esc>", "<cmd>noh<CR><esc>", { desc = "Escape and clear hlsearch", noremap = true })
@@ -40,8 +39,6 @@ set({ "n" }, "<S-A-l>", "<cmd>vertical resize +2<CR>", { desc = "Increase window
 -- Searching
 ----
 -- A lot of these are taken from DOOM Emacs / Spacemacs
-set({ "n" }, "<leader>/", "<cmd>Telescope live_grep<CR>", options)                                        -- fuzzy search all files in project (cwd)
-set({ "n" }, "<leader>,", "<cmd>Telescope buffers show_all_buffers=true sort_lastused=true<CR>", options) -- search buffers, default selection is always the last buffer
 set({ "n" }, "<leader>bn", "<cmd>bn<CR>", options)                                                        -- navigate to the next buffer
 set({ "n" }, "<leader>b]", "<cmd>bn<CR>", options)                                                        -- navigate to the next buffer
 set({ "n" }, "<leader>bp", "<cmd>bp<CR>", options)                                                        -- navigate to the previous buffer
@@ -50,12 +47,6 @@ set({ "n" }, "<leader>bd", "<cmd>bd<CR>", options)                              
 --set({ "n" }, "<leader>bx", "<cmd>lua require('user.scratch').toggle_scratch()<CR>", options) -- pop up scratch buffer, haven't figured this out yet
 --set({ "n" }, "<leader>bX", "<cmd>lua require('user.scratch').switch_to_scratch()<CR>", options) -- switch to scratch buffer, haven't figured this out yet
 set({ "n" }, "<leader>by", "<cmd>%y<CR>", options)                                                                       -- yank the buffer
-set({ "n" }, "<leader>:", "<cmd>lua require('telescope.builtin').command_history()<CR>", options)                        -- search previous commands
-set({ "n" }, "<leader>fr", "<cmd>lua require('telescope.builtin').oldfiles()<CR>", options)                              -- search recent files
-set({ "n" }, "<leader>fp", "<cmd>lua require('telescope.builtin').find_files({ cwd = '~/.config/nvim/' })<CR>", options) -- search private (config) files
-
--- Projects
-set({ "n" }, "<leader>pf", "<cmd>lua require('telescope.builtin').find_files()<CR>", options) -- search files in project (cwd)
 
 -- Editing
 -- Remap for dealing with word wrap
