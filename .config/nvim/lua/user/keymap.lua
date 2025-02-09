@@ -12,7 +12,6 @@ vim.g.maplocalleader = " "
 ----
 set({ "n" }, "<leader>qq", "<cmd>qa<CR>", options) -- quit nvim
 set({ "n" }, "<leader>fs", "<cmd>w<CR>", options)  -- save file
-set({ "n" }, "<leader>gg", "<cmd>Neogit<CR>", options)
 set({ "n" }, "<Esc>", "<cmd>noh<CR><esc>", { desc = "Escape and clear hlsearch", noremap = true })
 
 -- Tabs (Workspaces)

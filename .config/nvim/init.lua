@@ -39,9 +39,6 @@ vim.filetype.add({
 require("user.option")
 require("user.keymap")
 
--- Other configurations
-require("user.netrw")
-
 -- Plugins
 -- plugin repositories are stored in ~/.local/share/nvim/lazy
 require("lazy").setup({
@@ -59,6 +56,7 @@ require("lazy").setup({
     require("user.plugins.autoindent"),
 
     -- Coding
+    require("user.plugins.git"),
     require("user.plugins.completions"),
     require("user.plugins.lsp"),
     require("user.plugins.treesitter"),
