@@ -13,16 +13,22 @@ function pacman -d 'intuitive pacman commands'
             command sudo pacman -Rns $argv[2..-1] 
             return
         case 'status'
-            command pacman -Qu
+            command checkupdates
             return
         case 'update'
-            command sudo pacman -Syu 
+            archnews
+            read -P "Press any key to continue..."
+            command sudo pacman -Syu
+            if test $status -ne 0
+              return
+            end
             return
         case 'mirrors'
-            command sudo reflector --country US --protocol https -i .edu --sort rate | sudo tee /etc/pacman.d/mirrorlist 
+            command sudo reflector --connection-timeout 1 --download-timeout 1 --age 24 --delay 12 --country US --include '\.edu' --latest 5 --protocol https --threads 32 --save /etc/pacman.d/mirrorlist
+            cat /etc/pacman.d/mirrorlist
             return
         case 'clean'
-            command sudo paccache -r
+            command sudo pacman -Scc --noconfirm
             return
         # case 'maintenance'
         #     command sudo paccache -r
