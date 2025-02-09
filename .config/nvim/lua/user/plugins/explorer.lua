@@ -16,6 +16,8 @@ return {
     keymaps = {
       ["h"] = { "actions.parent", mode = "n" },
       ["l"] = { "actions.select", mode = "n" },
+      ["<cr>"] = { "actions.select", mode = "n" },
+      ["w"] = { "actions.cd", mode = "n" },
       ["gr"] = { "actions.refresh", mode = "n" },
       ["zh"] = { "actions.toggle_hidden", mode = "n" },
       ["q"] = { "actions.close", mode = "n" },
