@@ -9,5 +9,8 @@ rsync --verbose --delete --recursive ~/.config/alacritty/ ./.config/alacritty/
 # Fish config
 rsync --verbose --delete --recursive --exclude fish_variables ~/.config/fish/ ./.config/fish/
 
+# Tmux config
+rsync --verbose ~/.tmux.conf ./.tmux.conf
+
 # Neovim config
 rsync --verbose --delete --recursive --exclude lazy-lock.json ~/.config/nvim/ ./.config/nvim/
