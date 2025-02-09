@@ -11,5 +11,8 @@ size = 11.0
 [font.normal]
 family = "JetBrains Mono"
 
+[terminal.shell]
+program = "/bin/fish"
+
 [general]
 import = ["themes/kanagawa-paper.toml"]
