@@ -12,8 +12,6 @@ vim.g.maplocalleader = " "
 ----
 set({ "n" }, "<leader>qq", "<cmd>qa<CR>", options) -- quit nvim
 set({ "n" }, "<leader>fs", "<cmd>w<CR>", options)  -- save file
---set({ "n" }, "<leader>e", "<cmd>Explore<CR>", options) -- open project file browser
-set({ "n" }, "<leader>fd", "<cmd>Explore<CR>", options) -- open relative file browser
 set({ "n" }, "<leader>gg", "<cmd>Neogit<CR>", options)
 set({ "n" }, "<Esc>", "<cmd>noh<CR><esc>", { desc = "Escape and clear hlsearch", noremap = true })
 
@@ -43,9 +41,11 @@ set({ "n" }, "<leader>bn", "<cmd>bn<CR>", options)                              
 set({ "n" }, "<leader>b]", "<cmd>bn<CR>", options)                                                        -- navigate to the next buffer
 set({ "n" }, "<leader>bp", "<cmd>bp<CR>", options)                                                        -- navigate to the previous buffer
 set({ "n" }, "<leader>b[", "<cmd>bp<CR>", options)                                                        -- navigate to the previous buffer
-set({ "n" }, "<leader>bd", "<cmd>bd<CR>", options)                                                        -- kill the buffer
+
+-- set({ "n" }, "<leader>bd", "<cmd>bd<CR>", options)                                                        -- kill the buffer
 --set({ "n" }, "<leader>bx", "<cmd>lua require('user.scratch').toggle_scratch()<CR>", options) -- pop up scratch buffer, haven't figured this out yet
 --set({ "n" }, "<leader>bX", "<cmd>lua require('user.scratch').switch_to_scratch()<CR>", options) -- switch to scratch buffer, haven't figured this out yet
+--
 set({ "n" }, "<leader>by", "<cmd>%y<CR>", options)                                                                       -- yank the buffer
 
 -- Editing

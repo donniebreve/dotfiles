@@ -52,4 +52,10 @@ vim.opt.completeopt = { "menuone", "noselect" }
 -- Commands
 vim.opt.showcmd = true
 vim.opt.cmdheight = 1
-vim.opt.shell = "fish"
+
+-- Shell
+if vim.loop.os_uname().sysname == 'Darwin' then
+    vim.o.shell = '/bin/zsh'
+elseif vim.loop.os_uname().sysname == 'Linux' then
+    vim.o.shell = '/bin/fish'
+end
