@@ -1,3 +1,0 @@
-exec --no-startup-id libinput-gestures-setup start
-exec --no-startup-id redshift -m wayland
-#exec --no-startup-id eventd

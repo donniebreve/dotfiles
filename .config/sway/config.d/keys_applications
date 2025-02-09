@@ -1,9 +1,0 @@
-# start your launcher
-bindsym $mod+space exec $menu
-
-# start a terminal
-bindsym $mod+Return exec $term
-
-bindsym $mod+Shift+b exec $browser
-bindsym $mod+Shift+Return exec termite -e vifm
-

@@ -1,2 +1,0 @@
-bindsym $mod+Shift+Alt+p exec shutdown -P 1
-bindsym $mod+Shift+Alt+c exec shutdown -c

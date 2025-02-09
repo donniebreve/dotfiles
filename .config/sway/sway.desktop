@@ -1,0 +1,6 @@
+# Copy this file to ~/.local/share/applications
+[Desktop Entry]
+Name=Sway
+Comment=An i3-compatible Wayland compositor
+Exec=env XDG_CURRENT_DESKTOP=sway XDG_SESSION_DESKTOP=sway sway
+Type=Application
