@@ -50,6 +50,7 @@ require("lazy").setup({
     require("user.plugins.explorer"),
     require("user.plugins.buffer"),
     require("user.plugins.keybindings"),
+    require("user.plugins.greeter"),
 
     -- Editing
     require("user.plugins.jump"),
@@ -63,7 +64,8 @@ require("lazy").setup({
     require("user.plugins.filechanges"),
     require("user.plugins.http"),
   },
-  checker = { enabled = true },
+  checker = {
+    enabled = true,
+    notify = false
+  },
 })
-
-require("lazy").update({ show = false })
