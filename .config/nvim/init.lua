@@ -55,6 +55,7 @@ require("lazy").setup({
     -- Editing
     require("user.plugins.jump"),
     require("user.plugins.autoindent"),
+    require("user.plugins.scratch"),
 
     -- Coding
     require("user.plugins.git"),
@@ -62,6 +63,7 @@ require("lazy").setup({
     require("user.plugins.lsp"),
     require("user.plugins.treesitter"),
     require("user.plugins.filechanges"),
+    require("user.plugins.lua"),
     require("user.plugins.http"),
   },
   checker = {

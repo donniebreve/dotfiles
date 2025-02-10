@@ -16,7 +16,7 @@ return {
         },
         lualine_y = {
           { "progress", padding = { right = 0, left = 1 }, separator = "" },
-          { "location", padding = { right = 1, left = 0 } }
+          { "location", padding = { right = 1, left = 1 } }
         },
         lualine_z = {
           {
