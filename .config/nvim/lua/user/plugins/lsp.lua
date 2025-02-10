@@ -20,6 +20,7 @@ return {
           }
         }
       }
+      require("lspconfig").ts_ls.setup {}
       require("lspconfig").omnisharp.setup {
         cmd = { "omnisharp", "-lsp" },
         filetypes = { "cs", "vb" }

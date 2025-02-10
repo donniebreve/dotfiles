@@ -9,6 +9,6 @@ return {
     "ScratchSplit",
   },
   opts = {
-    buffer_name = "[Scratch]"
+    buffer_name = "_Scratch_"
   },
 }
