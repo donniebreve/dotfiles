@@ -36,6 +36,7 @@ vim.opt.smarttab = true
 vim.opt.tabstop = 2
 vim.opt.undofile = true
 vim.opt.undodir = "/tmp/vim/undodir"
+vim.g.markdown_folding = 1
 
 -- Searching
 vim.opt.ignorecase = true

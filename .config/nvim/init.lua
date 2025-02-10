@@ -34,6 +34,17 @@ vim.filetype.add({
   },
 })
 
+-- Markdown
+-- vim.api.nvim_create_autocmd("FileType", {
+--   pattern = "markdown",
+--   desc = "Change folding to use treesitter",
+--   callback = function()
+--     vim.opt.foldmethod = "expr"
+--     vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+--   end,
+--   group = user_augroup
+-- })
+
 -- Options and keybindings here
 -- These should come before the plugins according to the documentation
 require("user.option")
@@ -63,8 +74,11 @@ require("lazy").setup({
     require("user.plugins.lsp"),
     require("user.plugins.treesitter"),
     require("user.plugins.filechanges"),
-    require("user.plugins.lua"),
+
+    -- Specific languages
     require("user.plugins.http"),
+    require("user.plugins.lua"),
+    require("user.plugins.markdown"),
   },
   checker = {
     enabled = true,
