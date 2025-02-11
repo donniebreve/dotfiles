@@ -56,6 +56,7 @@ require("lazy").setup({
   spec = {
     -- Interface
     require("user.plugins.theme"),
+    require("user.plugins.tabline"),
     require("user.plugins.statusline"),
     require("user.plugins.search"),
     require("user.plugins.explorer"),

@@ -10,42 +10,42 @@ vim.g.maplocalleader = " "
 
 -- General
 ----
-set({ "n" }, "<leader>qq", "<cmd>qa<CR>", options) -- quit nvim
-set({ "n" }, "<leader>fs", "<cmd>w<CR>", options)  -- save file
-set({ "n" }, "<Esc>", "<cmd>noh<CR><esc>", { desc = "Escape and clear hlsearch", noremap = true })
+set({ "n" }, "<leader>qq", "<cmd>qa<cr>", options) -- quit nvim
+set({ "n" }, "<leader>fs", "<cmd>w<cr>", options)  -- save file
+set({ "n" }, "<Esc>", "<cmd>noh<cr><esc>", { desc = "Escape and clear hlsearch", noremap = true })
 
--- Tabs (Workspaces)
+-- Tabs
 -- Tabs in vim are not like workspaces exactly (even though they contain a list of buffers)
 -- Something I want is the ability to switch between projects quickly while keeping vim open
 -- Needs some more investigation here
---set({ "n" }, "<leader><tab>.", "<cmd>Telescope telescope-tabs list_tabs<CR>", options)
+set({ "n" }, "<leader><tab>d", "<cmd>tabclose<cr>", options)
 
 -- Windows
 set({ "n" }, "<leader>wd", "<C-w>c", options)
-set({ "n" }, "<leader>ws", "<cmd>split<CR>", options)
-set({ "n" }, "<leader>wv", "<cmd>vsplit<CR>", options)
+set({ "n" }, "<leader>ws", "<cmd>split<cr>", options)
+set({ "n" }, "<leader>wv", "<cmd>vsplit<cr>", options)
 set({ "n" }, "<leader>wh", "<C-w>h", options)
 set({ "n" }, "<leader>wj", "<C-w>j", options)
 set({ "n" }, "<leader>wk", "<C-w>k", options)
 set({ "n" }, "<leader>wl", "<C-w>l", options)
-set({ "n" }, "<S-A-h>", "<cmd>vertical resize -2<CR>", { desc = "Decrease window width", remap = true })
-set({ "n" }, "<S-A-j>", "<cmd>resize -2<CR>", { desc = "Decrease window height", remap = true })
-set({ "n" }, "<S-A-k>", "<cmd>resize -2<CR>", { desc = "Increase window height", remap = true })
-set({ "n" }, "<S-A-l>", "<cmd>vertical resize +2<CR>", { desc = "Increase window width", remap = true })
+set({ "n" }, "<S-A-h>", "<cmd>vertical resize -2<cr>", { desc = "Decrease window width", remap = true })
+set({ "n" }, "<S-A-j>", "<cmd>resize -2<cr>", { desc = "Decrease window height", remap = true })
+set({ "n" }, "<S-A-k>", "<cmd>resize -2<cr>", { desc = "Increase window height", remap = true })
+set({ "n" }, "<S-A-l>", "<cmd>vertical resize +2<cr>", { desc = "Increase window width", remap = true })
 
 -- Searching
 ----
 -- A lot of these are taken from DOOM Emacs / Spacemacs
-set({ "n" }, "<leader>bn", "<cmd>bn<CR>", options)                                                        -- navigate to the next buffer
-set({ "n" }, "<leader>b]", "<cmd>bn<CR>", options)                                                        -- navigate to the next buffer
-set({ "n" }, "<leader>bp", "<cmd>bp<CR>", options)                                                        -- navigate to the previous buffer
-set({ "n" }, "<leader>b[", "<cmd>bp<CR>", options)                                                        -- navigate to the previous buffer
+set({ "n" }, "<leader>bn", "<cmd>bn<cr>", options)                                                        -- navigate to the next buffer
+set({ "n" }, "<leader>b]", "<cmd>bn<cr>", options)                                                        -- navigate to the next buffer
+set({ "n" }, "<leader>bp", "<cmd>bp<cr>", options)                                                        -- navigate to the previous buffer
+set({ "n" }, "<leader>b[", "<cmd>bp<cr>", options)                                                        -- navigate to the previous buffer
 
--- set({ "n" }, "<leader>bd", "<cmd>bd<CR>", options)                                                        -- kill the buffer
---set({ "n" }, "<leader>bx", "<cmd>lua require('user.scratch').toggle_scratch()<CR>", options) -- pop up scratch buffer, haven't figured this out yet
---set({ "n" }, "<leader>bX", "<cmd>lua require('user.scratch').switch_to_scratch()<CR>", options) -- switch to scratch buffer, haven't figured this out yet
+-- set({ "n" }, "<leader>bd", "<cmd>bd<cr>", options)                                                        -- kill the buffer
+--set({ "n" }, "<leader>bx", "<cmd>lua require('user.scratch').toggle_scratch()<cr>", options) -- pop up scratch buffer, haven't figured this out yet
+--set({ "n" }, "<leader>bX", "<cmd>lua require('user.scratch').switch_to_scratch()<cr>", options) -- switch to scratch buffer, haven't figured this out yet
 --
-set({ "n" }, "<leader>by", "<cmd>%y<CR>", options)                                                                       -- yank the buffer
+set({ "n" }, "<leader>by", "<cmd>%y<cr>", options)                                                                       -- yank the buffer
 
 -- Editing
 -- Remap for dealing with word wrap
@@ -71,10 +71,10 @@ set({ "n" }, "x", '"_x', options)
 set({ "n" }, "c", '"_c', options)
 
 -- Line movement
-set({ "n", "v" }, "<A-j>", ":m .+1<CR>==", options)
-set({ "n", "v" }, "<A-k>", ":m .-2<CR>==", options)
-set({ "x" }, "<A-j>", ":move '>+1<CR>gv-gv", options)
-set({ "x" }, "<A-k>", ":move '<-2<CR>gv-gv", options)
+set({ "n", "v" }, "<A-j>", ":m .+1<cr>==", options)
+set({ "n", "v" }, "<A-k>", ":m .-2<cr>==", options)
+set({ "x" }, "<A-j>", ":move '>+1<cr>gv-gv", options)
+set({ "x" }, "<A-k>", ":move '<-2<cr>gv-gv", options)
 
 -- Visual shifting (does not exit Visual mode)
 set({ "v" }, "<", "<gv", options)
