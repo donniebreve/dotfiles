@@ -27,7 +27,7 @@ vim.opt.wrap = true
 -- Editing
 vim.opt.autoindent = true
 vim.opt.backspace = "start,eol,indent"
--- vim.opt.cindent = true Not sure of this one yet
+vim.opt.cindent = true -- Not sure of this one yet
 vim.opt.expandtab = true
 vim.opt.iskeyword.append = "-"
 vim.opt.shiftwidth = 2
@@ -36,7 +36,7 @@ vim.opt.smarttab = true
 vim.opt.tabstop = 2
 vim.opt.undofile = true
 vim.opt.undodir = "/tmp/vim/undodir"
-vim.g.markdown_folding = 1
+-- vim.g.markdown_folding = 1
 
 -- Searching
 vim.opt.ignorecase = true

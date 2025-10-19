@@ -33,10 +33,6 @@ function fish_prompt -d "The prompt"
     echo ': '
 end
 
-function vim -d "alias vim to nvim"
-  command nvim $argv
-end
-
 function edit -d "alias edit to nvim"
   command nvim $argv
 end
@@ -51,6 +47,9 @@ function launch -d "launch a window manager"
 
     switch $argv[1]
         case 'sway'
+            set -gx XDG_SESSION_DESKTOP sway
+            set -gx XDG_CURRENT_DESKTOP sway
+            set -gx QT_QPA_PLATFORM=wayland
             command sway
             return
         case 'gnome'

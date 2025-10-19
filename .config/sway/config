@@ -1,6 +1,18 @@
+# ------------------------------------------------------------
+# IMPORTANT: DO NOT REMOVE THIS SECTION
+# ------------------------------------------------------------
+# This block sets the necessary environment variables and D‑Bus
+# configuration required for proper Wayland operation with Sway.
+# The Sway developers have decided to ignore these settings,
+# which causes a frustrating default experience.
+# Including this ensures the system behaves as expected.
+include /etc/sway/config.d/*
+exec systemctl --user set-environment XDG_SESSION_DESKTOP=sway 
+exec systemctl --user set-environment XDG_CURRENT_DESKTOP=sway 
+exec systemctl --user set-environment QT_QPA_PLATFORM=wayland 
+
 # Main options
 # ------------------------------------------------
-#include /etc/sway/config.d/*
 
 set $mod Mod4
 
@@ -10,7 +22,7 @@ set $up k
 set $right l
 
 bindsym $mod+Shift+r reload
-bindsym $mod+Shift+q exec swaynag -t warning -m 'End Wayland session?' -b 'Yes.' 'swaymsg exit'
+bindsym $mod+Shift+q exec swaynag -t warning -m 'Exit Sway?' -b 'Yes.' 'swaymsg exit'
 
 # Use wlogout as a session menu:
 #bindsym $mod+Shift+q exec wlogout
@@ -51,7 +63,7 @@ bindsym $mod+Alt+i layout toggle split
 bindsym $mod+f fullscreen
 
 # Toggle the current focus between tiling and floating mode:
-bindsym $mod+Escape floating toggle
+bindsym $mod+t floating toggle
 
 # Swap focus between the tiling area and the floating area:
 #bindsym Alt+Tab focus mode_toggle
@@ -79,6 +91,7 @@ for_window [app_id="mpv"] inhibit_idle focus
 for_window [title="VLC"] inhibit_idle focus
 # Full screen
 #for_window [title="Path of Exile 2"] fullscreen enable, inhibit_idle fullscreen
+for_window [title="ELDEN RING NIGHTREIGN"] inhibit_idle focus
 # Flameshot
 for_window [app_id="flameshot"] border pixel 0, floating enable, fullscreen disable, move absolute position 0 0
 
@@ -136,10 +149,12 @@ bindsym $mod+Shift+9 move container to workspace number 4
 bindsym $mod+Shift+0 move container to workspace number 5
 
 # Move workspaces
-bindsym Alt+Tab workspace next
-bindsym Alt+Shift+Tab workspace prev
-bindsym $mod+Control+$right workspace next
-bindsym $mod+Control+$left workspace prev
+bindsym Alt+Tab exec ~/.config/sway/workspace.sh switch next
+bindsym $mod+d exec ~/.config/sway/workspace.sh switch next
+bindsym $mod+Shift+d exec ~/.config/sway/workspace.sh move next
+bindsym Alt+Shift+Tab exec ~/.config/sway/workspace.sh switch previous
+bindsym $mod+u exec ~/.config/sway/workspace.sh switch previous
+bindsym $mod+Shift+u exec ~/.config/sway/workspace.sh move previous
 
 # Move focused container to the next or previous existing workspace:
 # bindsym $mod+Shift+Next move container to workspace next_on_output

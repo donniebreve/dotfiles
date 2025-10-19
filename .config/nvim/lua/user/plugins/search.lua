@@ -1,43 +1,33 @@
--- Telescope: provides navigation and search pop up windows
 return {
-  "nvim-telescope/telescope.nvim",
-  lazy = false,
-  dependencies = {
-    "nvim-lua/plenary.nvim",
-    "LukasPietzschmann/telescope-tabs"
+  "folke/snacks.nvim",
+  ---@type snacks.Config
+  opts = {
+    picker = {
+      -- https://github.com/folke/snacks.nvim/blob/main/docs/picker.md
+      enabled = true,
+      layout = { preset = "ivy" },
+    },
   },
-  config = function()
-    local actions = require("telescope.actions")
-    require("telescope").setup({
-      defaults = require("telescope.themes").get_ivy({
-        borderchars = {
-          preview = { " ", " ", " ", " ", " ", " ", " ", " ", },
-          prompt = { " ", " ", " ", " ", " ", " ", " ", " ", },
-          results = { " " },
-        },
-        results_title = false,
-        -- TODO: Investigate and open bug
-        -- These are not currently working
-        -- prompt_title = false,
-        -- preview_title = false,
-        mappings = {
-          i = {
-            ["<tab>"] = actions.move_selection_next,
-            ["<s-tab>"] = actions.move_selection_previous,
-            ["<esc>"] = actions.close,
-          },
-        },
-      })
-    })
-  end,
   keys = {
-    { "<leader>/",      "<cmd>Telescope live_grep<cr>",                                                      desc = "Fuzzy search CWD" },
-    { "<leader>,",      "<cmd>Telescope buffers show_all_buffers=true sort_lastused=true<cr>",               desc = "Buffers" },
-    { "<leader>:",      "<cmd>lua require('telescope.builtin').commands()<cr>",                              desc = "Command history" },
-    { "<leader><c-r>",  "<cmd>lua require('telescope.builtin').command_history()<cr>",                       desc = "Command history" },
-    { "<leader><tab>,", "<cmd>Telescope telescope-tabs list_tabs<cr>",                                       desc = "Tabs" },
-    { "<leader>fr",     "<cmd>lua require('telescope.builtin').oldfiles()<cr>",                              desc = "Recent files" },
-    { "<leader>fp",     "<cmd>lua require('telescope.builtin').find_files({ cwd = '~/.config/nvim/' })<cr>", desc = "Private (config) files" },
-    { "<leader>pf",     "<cmd>lua require('telescope.builtin').find_files()<cr>",                            desc = "Find files in CWD" },
+    -- Find
+    { "<leader>.",  function() Snacks.picker.smart() end, desc = "Smart Find Files" },
+    { "<leader>,",  function() Snacks.picker.buffers({ current = false, sort_lastused = true }) end, desc = "Buffers" },
+    { "<leader>:",  function() Snacks.picker.command_history() end, desc = "Command History" },
+    { "<m-x>",      function() Snacks.picker.command_history() end, desc = "Command History" },
+    { "<leader>e",  function() Snacks.explorer() end, desc = "File Explorer" },
+    { '<leader>s/', function() Snacks.picker.search_history() end, desc = "Search History" },
+    -- Files
+    { "<leader>fc", function() Snacks.picker.files({ cwd = vim.fn.stdpath("config") }) end, desc = "Find Config File" },
+    { "<leader>ff", function() Snacks.picker.files() end, desc = "Find Files" },
+    { "<leader>fg", function() Snacks.picker.git_files() end, desc = "Find Git Files" },
+    { "<leader>fp", function() Snacks.picker.projects() end, desc = "Projects" },
+    { "<leader>fr", function() Snacks.picker.recent() end, desc = "Recent" },
+    { "<leader>f/", function() Snacks.picker.grep() end, desc = "Grep" },
+    { "<leader>f*", function() Snacks.picker.grep_word() end, desc = "Visual selection or word", mode = { "n", "x" } },
+     -- Grep
+    { "<leader>/",  function() Snacks.picker.lines() end, desc = "Buffer Lines" },
+    { "<leader>b/", function() Snacks.picker.grep_buffers() end, desc = "Grep Open Buffers" },
+    -- Help
+    { "<leader>h",  function() Snacks.picker.help() end, desc = "Search help" },
   }
 }

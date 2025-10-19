@@ -13,7 +13,7 @@ function system -d 'system commands'
             echo ""
             echo "-- paru --"
             echo ""
-            command paru -Syu
+            command paru -Syu -a --sudoloop
             echo ""
             echo "-- flatpak --"
             echo ""

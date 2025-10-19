@@ -1,3 +1,6 @@
+[env]
+TERM = "alacritty"
+
 [window]
 title = "Alacritty"
 
@@ -9,7 +12,7 @@ lines = 36
 size = 11.0
 
 [font.normal]
-family = "JetBrains Mono"
+family = "JetBrainsMono Nerd Font"
 
 [terminal.shell]
 program = "/bin/fish"

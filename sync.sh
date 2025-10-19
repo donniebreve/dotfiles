@@ -6,6 +6,9 @@ rsync --verbose --delete --recursive ~/.config/sway/ ./.config/sway/
 # Alacritty config
 rsync --verbose --delete --recursive ~/.config/alacritty/ ./.config/alacritty/
 
+# WezTerm config
+rsync --verbose --delete --recursive ~/.config/wezterm/ ./.config/wezterm/
+
 # Fish config
 rsync --verbose --delete --recursive --exclude fish_variables ~/.config/fish/ ./.config/fish/
 

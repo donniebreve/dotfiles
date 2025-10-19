@@ -24,28 +24,18 @@ set({ "n" }, "<leader><tab>d", "<cmd>tabclose<cr>", options)
 set({ "n" }, "<leader>wd", "<C-w>c", options)
 set({ "n" }, "<leader>ws", "<cmd>split<cr>", options)
 set({ "n" }, "<leader>wv", "<cmd>vsplit<cr>", options)
-set({ "n" }, "<leader>wh", "<C-w>h", options)
-set({ "n" }, "<leader>wj", "<C-w>j", options)
-set({ "n" }, "<leader>wk", "<C-w>k", options)
-set({ "n" }, "<leader>wl", "<C-w>l", options)
 set({ "n" }, "<S-A-h>", "<cmd>vertical resize -2<cr>", { desc = "Decrease window width", remap = true })
 set({ "n" }, "<S-A-j>", "<cmd>resize -2<cr>", { desc = "Decrease window height", remap = true })
 set({ "n" }, "<S-A-k>", "<cmd>resize -2<cr>", { desc = "Increase window height", remap = true })
 set({ "n" }, "<S-A-l>", "<cmd>vertical resize +2<cr>", { desc = "Increase window width", remap = true })
 
 -- Searching
-----
 -- A lot of these are taken from DOOM Emacs / Spacemacs
-set({ "n" }, "<leader>bn", "<cmd>bn<cr>", options)                                                        -- navigate to the next buffer
-set({ "n" }, "<leader>b]", "<cmd>bn<cr>", options)                                                        -- navigate to the next buffer
-set({ "n" }, "<leader>bp", "<cmd>bp<cr>", options)                                                        -- navigate to the previous buffer
-set({ "n" }, "<leader>b[", "<cmd>bp<cr>", options)                                                        -- navigate to the previous buffer
-
--- set({ "n" }, "<leader>bd", "<cmd>bd<cr>", options)                                                        -- kill the buffer
---set({ "n" }, "<leader>bx", "<cmd>lua require('user.scratch').toggle_scratch()<cr>", options) -- pop up scratch buffer, haven't figured this out yet
---set({ "n" }, "<leader>bX", "<cmd>lua require('user.scratch').switch_to_scratch()<cr>", options) -- switch to scratch buffer, haven't figured this out yet
---
-set({ "n" }, "<leader>by", "<cmd>%y<cr>", options)                                                                       -- yank the buffer
+set({ "n" }, "<leader>bn", "<cmd>bn<cr>", options)
+set({ "n" }, "<leader>b]", "<cmd>bn<cr>", options)
+set({ "n" }, "<leader>bp", "<cmd>bp<cr>", options)
+set({ "n" }, "<leader>b[", "<cmd>bp<cr>", options)
+set({ "n" }, "<leader>by", "<cmd>%y<cr>", options)
 
 -- Editing
 -- Remap for dealing with word wrap
@@ -56,19 +46,8 @@ set({ "n" }, "j", 'v:count == 0 ? "gj" : "j"', { noremap = true, expr = true, si
 set({ "n", "v" }, "gh", "^", options)
 set({ "n", "v" }, "gl", "$", options)
 
--- Shorten ctrl+d/u
-set({ "n", "v" }, "<C-d>", "10jzz", options)
-set({ "n", "v" }, "<C-u>", "10kzz", options)
-
 -- Redo
 set({ "n" }, "U", "<C-r>", options)
-
--- Don't clobber register on visual paste
-set({ "v" }, "p", '"_dp', options)
-set({ "v" }, "P", '"_dP', options)
--- Don't clobber on delete or change
-set({ "n" }, "x", '"_x', options)
-set({ "n" }, "c", '"_c', options)
 
 -- Line movement
 set({ "n", "v" }, "<A-j>", ":m .+1<cr>==", options)
@@ -88,8 +67,13 @@ set({ "n" }, "Y", "y$", options)
 --set({ "n" }, "dw", "diw", options)
 
 -- Rename
---set({ "n" }, "gr", vim.lsp.buf.rename, options)
-set({ "n" }, "<leader>rr", vim.lsp.buf.rename, options)
+set({ "n" }, "gr", vim.lsp.buf.rename, options)
+
+-- Diagnostics
+set({ "n" }, "<leader>ce", "<cmd>lua vim.diagnostic.open_float()<cr>", { desc = "Error", noremap = true, silent = true })
+set({ "n" }, "<leader>cE", "<cmd>Telescope diagnostics<cr>", { desc = "Error(s)", noremap = true, silent = true })
+set({ "n" }, "<leader>e[", "<cmd>lua vim.diagnostic.goto_prev()<cr>", { noremap = true, silent = true })
+set({ "n" }, "<leader>e]", "<cmd>lua vim.diagnostic.goto_next()<cr>", { noremap = true, silent = true })
 
 -- Terminal
 local termoptions = { noremap = true, silent = true }
